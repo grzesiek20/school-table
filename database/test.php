@@ -7,7 +7,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$mysqli->query("CREATE TABLE myCity LIKE City");
+//$mysqli->query("CREATE TABLE myCity LIKE City");
 
 /* Prepare an insert statement */
 $query = "INSERT INTO slider (id_slider, height) VALUES (?,?)";
