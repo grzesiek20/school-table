@@ -1,0 +1,3 @@
+$("#randomize").click(function(){
+	losowanieAjax();
+});

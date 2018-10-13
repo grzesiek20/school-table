@@ -1,0 +1,66 @@
+<?php
+
+	session_start();
+	
+	require_once "connect.php";
+
+	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+	
+	mysqli_set_charset($polaczenie, "utf8");
+	
+	if ($polaczenie->connect_errno!=0)
+	{
+		echo "Error: ".$polaczenie->connect_errno;
+	}
+	else
+	{
+		$sql = "SELECT * FROM divy";
+		
+		if($rezultat = @$polaczenie->query($sql))
+		{
+			$ile_wierszy = $rezultat->num_rows;
+			$table=$rezultat->fetch_assoc();
+		}
+?>
+
+
+
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>Divy</title>
+	
+	<!-- Bootstrap Core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- resizable-->
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="timer.js"></script>
+	  <script>
+  $( function() {
+    $( "div" ).resizable({
+      grid: 20
+    });
+  } );
+  </script>	
+
+</head>
+
+<body onload="odliczanie();">
+		<div class="container">
+		<?php $table['class'] ?>
+			<div class="ui-widget-content">gddgdd</div>
+		</div>
+</body>
+</html>
