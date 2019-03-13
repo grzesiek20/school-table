@@ -1,7 +1,7 @@
 <?php
-	
-	//require_once "database/divclass.php";
+	require_once __DIR__."/../database/session.php";
 	require_once __DIR__."/../database/class/divclass.php";
+	
 	$div = new div();
 	$div->getDiv($_GET['id']);
 ?>

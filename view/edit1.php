@@ -1,6 +1,5 @@
 <?php
-	
-	//require_once "database/divedit1.php";
+	require_once __DIR__."/../database/session.php";
 	require_once __DIR__."/../database/panel/divedit.php";
 ?>
 

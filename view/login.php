@@ -31,7 +31,7 @@
                     <h3>Logowanie</h3>
                 </div>	
                 <div class="panel-body logon">
-                    <form action="database/zaloguj.php" method="post">
+                    <form action="../database/zaloguj.php" method="post">
                         <div class="form-group label-floating">
                             <label for="login" class="control-label">Login</label>
                             <input type="text" class="form-control" id="login" name="login" value="" autofocus>
