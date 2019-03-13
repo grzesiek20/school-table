@@ -60,9 +60,9 @@ class user
 			 header('Location: ../index.php');
 			 exit;
 		}
-		else{
+		else {
 			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-			 header('Location: ../login.php');
+			 header('Location: ../view/login.php');
 			 exit;
 		}
 	}

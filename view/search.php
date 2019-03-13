@@ -1,3 +1,7 @@
+<?php
+	require_once __DIR__."/../database/session.php";
+?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>

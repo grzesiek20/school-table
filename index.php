@@ -1,10 +1,10 @@
 <?php
-	//session_start();
-	// if (!isset($_SESSION['zalogowany']))
-	// {
-		// header('Location: zaloguj.php');
-		// exit();
-	// } 
+	session_start();
+	if (!isset($_SESSION['zalogowany']))
+	{
+		header('Location: database/zaloguj.php');
+		exit();
+	} 
 	require_once "database/conf.php";
 	require_once "database/test.php";
 
@@ -12,12 +12,13 @@
 
 <!DOCTYPE HTML>
 <html lang="pl">
-<head>
+<head>	
+	<title>Publiczna Szkoła Podstawowa im. Julisza Słowackiego w Pacanowie</title>
+	<meta name="description" content="PSP im. Janusza Słowackiego nr 1 w Pacanowie - Aktualności, informacje, kontakt " />
+
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	
-	<title>Publiczna Szkoła Podstawowa</title>
 	
 	<!-- Bootstrap Core CSS -->
 	
@@ -56,19 +57,19 @@ for ($i=0; $i<count($divs);$i++){
 						echo $divs[$i]['headertext'];
 					}
 					echo '</div>';
-					//if (!isset($_SESSION['zalogowany']))
+					if (!isset($_SESSION['zalogowany']))
 						echo '<div class="pull-left icolog"><a href="login.php"><i class="icon-login icons"></i></a></div>'; //logowanie
-					//else{
+					else{
 						echo '<div class="pull-left icolog"><a href="database/logout.php"><i class="icon-logout icons"></i></a></div>'; //wylogowanie
 						echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
 						
-					//}
-					//if (isset($_SESSION['zalogowany'])){
+					}
+					if (isset($_SESSION['zalogowany'])){
 						echo '<div class="pull-right ico"><a href="view/delete.php?id='.$divs[$i]['id_diva'].'"><i class="icon-trash icons"></i></a></div>';
 						echo '<div class="pull-right ico"><a href="view/edit1.php?id='.$divs[$i]['id_diva'].'"><i class="icon-cog icons"></i></a></div>';
 						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
 
-					//}				
+					}				
 			echo '</div>';
 		echo '</div>';
 	}
