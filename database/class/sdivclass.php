@@ -190,18 +190,18 @@ class sdiv
 	}
 	
 	function updateSdiv(){
-		$query = "UPDATE `body` SET content = ?, begdate = ?, enddate = ?, visible = ? WHERE id_sdiv = ?;";
-		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("sssii", $this->content, $this->begdate, $this->enddate, $this->visible, $this->id_sdiv);
-		$stmt->execute();
-		$stmt->close();
-		// $sql = "UPDATE `body` SET content = '". $this->hDB->escape_string($this->content)."', ";
-		// $sql .= "begdate = '" . $this->begdate . "', ";
-		// $sql .= "enddate = '" . $this->enddate . "', ";
-		// $sql .= "visible = '" . $this->visible . "' ";
-		// $sql .= "WHERE id_sdiv = '" . $this->id_sdiv ."'; ";
+		// $query = "UPDATE `body` SET content = ?, begdate = ?, enddate = ?, visible = ? WHERE id_sdiv = ?;";
+		// $stmt = $this->hDB->prepare($query);
+		// $stmt->bind_param("sssii", $this->content, $this->begdate, $this->enddate, $this->visible, $this->id_sdiv);
+		// $stmt->execute();
+		// $stmt->close();
+		$sql = "UPDATE `body` SET content = '". $this->hDB->escape_string($this->content)."', ";
+		$sql .= "begdate = '" . $this->begdate . "', ";
+		$sql .= "enddate = '" . $this->enddate . "', ";
+		$sql .= "visible = '" . $this->visible . "' ";
+		$sql .= "WHERE id_sdiv = '" . $this->id_sdiv ."'; ";
 		
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
+		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
 	}
 	
 	function insertSdiv(){

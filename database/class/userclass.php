@@ -45,7 +45,8 @@ class user
 	
 	
 	function checkUser(){
-		$sql = "SELECT id_user, name, surname FROM `user` WHERE login='".$this->login."' AND password='".$this->password."';";
+////////////////////NOT SECURE///////////////////////////
+		$sql = "SELECT id_user, name, surname FROM `user` WHERE login=".$this->login." AND password=".$this->password.";";
 		
 		$rs = $this->hDB->query($sql);
 		$ile = $rs->num_rows;
@@ -65,6 +66,56 @@ class user
 			 header('Location: ../view/login.php');
 			 exit;
 		}
+//////////////////////////////////////////////////////////////////////
+////////////////////////Parametrized//////////////////////////////////
+
+// $query = "SELECT id_user, name, surname FROM `user` WHERE login=? AND password=?;";
+// $stmt = $this->hDB->prepare($query);
+// $stmt->bind_param("ss", $this->login, $this->password);
+// $stmt->execute();
+// $result = $stmt->get_result();
+// $row = $result->fetch_array();
+// echo $row;
+// $stmt->close();
+// 		if($row)
+// 		{
+// 		$data = $result->fetch_array();
+// 			$_SESSION['id_user']= $data['id_user'];
+// 			$_SESSION['name'] = $data['name'];
+// 			$_SESSION['surname'] = $data['surname'];
+// 			$_SESSION['zalogowany'] = true;
+// 			 unset($_SESSION['blad']);
+// 			 header('Location: ../index.php');
+// 			 exit;
+// 		}
+// 		else {
+// 			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+// 			 header('Location: ../view/login.php');
+// 			 exit;
+// 		}
+////////////////////////////////Escape string/////////////////////////////////////////////////////
+		
+
+// $sql = "SELECT id_user, name, surname FROM `user` WHERE login=grzegorz AND password=password;";
+		
+// 		$rs = $this->hDB->query($sql);
+// 		$ile = $rs->num_rows;
+// 		if($ile>0)
+// 		{
+// 		$data = $rs->fetch_array();
+// 			$_SESSION['id_user']= $data['id_user'];
+// 			$_SESSION['name'] = $data['name'];
+// 			$_SESSION['surname'] = $data['surname'];
+// 			$_SESSION['zalogowany'] = true;
+// 			 unset($_SESSION['blad']);
+// 			 header('Location: ../index.php');
+// 			 exit;
+// 		}
+// 		else {
+// 			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+// 			 header('Location: ../view/login.php');
+// 			 exit;
+// 		}
 	}
 	
 	function getAll() {

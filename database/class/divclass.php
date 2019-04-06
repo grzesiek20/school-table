@@ -140,19 +140,29 @@ class div
 	
 	function addDiv()
     {
-		// $sql="INSERT INTO `divy` (`id_diva`,`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`) VALUES(NULL,'".$this->headertext."','".$this->headercolor."','".$this->headerfcolor."','".$this->headerfsize."','".$this->bgcolor."','".$this->fontsize."','".$this->fontcolor."','".$this->topm."','".$this->height."','".$this->per_width."') ;";
+		/////////////////////escape string///////////////////////////////
+		mysqli_escape_string($this->hDB, $this->getHeader());
 
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
+
+		////////////////////HTML entities/////////////////////////////////
+		$headerText = htmlentities($this->getHeader(), ENT_QUOTES, "UTF-8"); 
+
+		
+		$sql="INSERT INTO `divy` (`id_diva`,`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`) VALUES(NULL,'".mysqli_escape_string($this->hDB, $this->getHeader())."','".$this->headercolor."','".$this->headerfcolor."','".$this->headerfsize."','".$this->bgcolor."','".$this->fontsize."','".$this->fontcolor."','".$this->topm."','".$this->height."','".$this->per_width."') ;";
+
+		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
 		//$query = "INSERT INTO slider (id_slider, height) VALUES (?,?)";
-		$query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`)VALUES(?,?,?,?,?,?,?,?,?,?);";
 
-		$stmt = $this->hDB->prepare($query);
+		///////////////////////////parametrized query//////////////////////////////////////////////////
+		// $query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`)VALUES(?,?,?,?,?,?,?,?,?,?);";
 
-		$stmt->bind_param("sssisisiii", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->topm, $this->height, $this->per_width);
+		// $stmt = $this->hDB->prepare($query);
 
-		/* Execute the statement */
-		$stmt->execute();
-		$stmt->close();
+		// $stmt->bind_param("sssisisiii", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->topm, $this->height, $this->per_width);
+
+		// /* Execute the statement */
+		// $stmt->execute();
+		// $stmt->close();
     }
 	
 	function updateDiv()
