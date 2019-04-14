@@ -205,7 +205,7 @@ class sdiv
 	}
 	
 	function insertSdiv(){
-		$query = "INSERT INTO `body` (`id_diva`,`id_user`, `content`, `begdate`, `enddate`) VALUES ";
+		$query = "INSERT INTO `body` (`id_diva`, `id_user`, `content`, `begdate`, `enddate`) VALUES ";
 		$query .= "(?, 1, ?, ?, ?);";
 		$stmt = $this->hDB->prepare($query);
 		$stmt->bind_param("isss", $this->id_diva, $this->content, $this->begdate, $this->enddate);

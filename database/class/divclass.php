@@ -88,13 +88,9 @@ class div
 		/* Execute the statement */
 		$stmt->execute();
 
-		$stmt->bind_result($id_diva, $height, $per_width, $topm, $per_leftm, $bgcolor, $fontsize, $fontcolor, $headertext, $headercolor, $headerfsize, $headerfcolor, $textalign, $active);
+		$stmt->bind_result($id_diva, $bgcolor, $fontsize, $fontcolor, $headertext, $headercolor, $headerfsize, $headerfcolor, $textalign, $active);
 		if($stmt->fetch()){
 			$this->id_diva = $divID;
-			$this->height = $height;
-			$this->per_width = $per_width;
-			$this->topm = $topm;
-			$this->per_leftm = $per_leftm;
 			$this->bgcolor = $bgcolor;
 			$this->fontsize = $fontsize;
 			$this->fontcolor = $fontcolor;
@@ -110,7 +106,37 @@ class div
 	
 	function getAll() {
 		//$stmt = $this->hDB->prepare("SELECT * FROM `divy` WHERE active=1");
-		$sql = "SELECT * FROM `divy` WHERE active=1";
+		$sql = "SELECT * FROM `divy` NATURAL JOIN `location` WHERE active=1";
+		$info = array();
+		//$stmt->execute();
+		$rs = $this->hDB->query($sql);
+		
+		$i=0;
+		
+		while($data = $rs->fetch_array()){
+			$info[$i]['id_diva'] = $data['id_diva'];
+			$info[$i]['height'] = $data['height'];
+			$info[$i]['per_width'] = $data['per_width'];
+			$info[$i]['topm'] = $data['topm'];
+			$info[$i]['per_leftm'] = $data['per_leftm'];
+			$info[$i]['bgcolor'] = $data['bgcolor'];
+			$info[$i]['fontsize'] = $data['fontsize'];
+			$info[$i]['fontcolor'] = $data['fontcolor'];
+			$info[$i]['headertext'] = $data['header'];
+			$info[$i]['headercolor'] = $data['headercolor'];
+			$info[$i]['headerfsize'] = $data['headerfsize'];
+			$info[$i]['headerfcolor'] = $data['headerfcolor'];
+			$info[$i]['textalign'] = $data['textalign'];
+			$info[$i]['active'] = $data['active'];
+			$i++;
+		}
+		
+		return $info;
+	}
+
+	function getCSSProperties() {
+		//$stmt = $this->hDB->prepare("SELECT * FROM `divy` WHERE active=1");
+		$sql = "SELECT id_diva, height, per_width, topm, per_left, headercolor, headerfsize, headerfcolor, textalign, bgcolor, fontsize, fontcolor, FROM `divy` NATURAL JOIN `location` WHERE active=1";
 		$info = array();
 		//$stmt->execute();
 		$rs = $this->hDB->query($sql);
@@ -170,7 +196,7 @@ class div
 	function updateDivLocation()
     {
 		//$sql="UPDATE `divy` SET `per_width` = '".$this->per_width."', `height` = '".$this->height."', `per_leftm` = '".$this->per_leftm."', `topm` = '".$this->topm."' WHERE `id_diva` ='".$this->id_diva."';";
-		$query="UPDATE `divy` SET `per_width` = ?, `height` = ?, `per_leftm` = ?, `topm` = ? WHERE `id_diva` =?;";
+		$query="UPDATE `location` SET `per_width` = ?, `height` = ?, `per_leftm` = ?, `topm` = ? WHERE `id_diva` =?;";
 		$stmt = $this->hDB->prepare($query);
 		$stmt->bind_param("iiiii", $this->per_width, $this->height, $this->per_leftm, $this->topm, $this->id_diva);
 		$stmt->execute();

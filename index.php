@@ -1,13 +1,7 @@
 <?php
 	session_start();
-	if (!isset($_SESSION['zalogowany']))
-	{
-		header('Location: database/zaloguj.php');
-		exit();
-	} 
-	require_once "database/conf.php";
+	require_once "database/initindex.php";
 	require_once "database/test.php";
-
 ?>
 
 <!DOCTYPE HTML>
@@ -35,9 +29,9 @@
 	
 
 	<link href='http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </head>
 
@@ -48,44 +42,44 @@
 for ($i=0; $i<count($divs);$i++){
 	if($i==0){
 		echo '<div class ="tile">';
+		if (isset($_SESSION['zalogowany'])) {
 			echo '<div class="welcome panel showico block" id="div'.$divs[$i]['id_diva'].'">';
+		} else {
+			echo '<div class="welcome panel" id="div'.$divs[$i]['id_diva'].'">';
+		}
 					echo '<div class="col-md-12 cust'.$divs[$i]['id_diva'].'">';
-					if (isset($_SESSION['zalogowany'])){
-						echo $divs[$i]['headertext'].' -> '.$_SESSION['name'].' '.$_SESSION['surname']; //dodanie lini z loginem i id
-					}
-					else{
-						echo $divs[$i]['headertext'];
-					}
+					echo $divs[$i]['headertext'];
 					echo '</div>';
-					if (!isset($_SESSION['zalogowany']))
-						echo '<div class="pull-left icolog"><a href="login.php"><i class="icon-login icons"></i></a></div>'; //logowanie
-					else{
+					if (isset($_SESSION['zalogowany'])) {
 						echo '<div class="pull-left icolog"><a href="database/logout.php"><i class="icon-logout icons"></i></a></div>'; //wylogowanie
 						echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
-						
-					}
-					if (isset($_SESSION['zalogowany'])){
 						echo '<div class="pull-right ico"><a href="view/delete.php?id='.$divs[$i]['id_diva'].'"><i class="icon-trash icons"></i></a></div>';
 						echo '<div class="pull-right ico"><a href="view/edit1.php?id='.$divs[$i]['id_diva'].'"><i class="icon-cog icons"></i></a></div>';
 						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
-
+					} else {
+						echo '<div class="pull-left icolog"><a href="view/login.php"><i class="icon-login icons"></i></a></div>'; //logowanie
 					}				
 			echo '</div>';
 		echo '</div>';
 	}
 	else{
 //================================== Pozostałe bloki =============================================
-
-			echo '<div class="ui-widget-content panel panel-primary block" id="div'.$divs[$i]['id_diva'].'">';
+			if (isset($_SESSION['zalogowany'])) {
+				echo '<div class="ui-widget-content panel panel-primary block" id="div'.$divs[$i]['id_diva'].'">';
 				echo '<div class="panel-heading showico head'.$divs[$i]['id_diva'].'">';
+			} else {
+				echo '<div class="ui-widget-content panel panel-primary" id="div'.$divs[$i]['id_diva'].'">';
+				echo '<div class="panel-heading head'.$divs[$i]['id_diva'].'">';
+			}
 					echo '<div class="row">';
 						echo '<div class="col-md-12">';
 								echo $divs[$i]['headertext'];
 							echo '</div>';
 								 echo '<div class="col-md-12">';
+								 if (isset($_SESSION['zalogowany'])) {
 									 echo '<div class="pull-left ico"><a href="view/edit.php?id='.$divs[$i]['id_diva'].'"><i class="icon-cog icons"></i></a></div>';
 									 echo '<div class="pull-left ico"><a href="view/delete.php?id='.$divs[$i]['id_diva'].'"><i class="icon-trash icons"></i></a></div>';
-							
+								 }
 //--------- Jeśli blok z losowaniem ----------------------------
 									if($divs[$i]['id_diva']==8){
 										echo '<button onclick="losowanieAjax()" class="btn ico icons buttoncustom pull-right" id="randomize" name="randomize"><i class="icon-spin3 rand"></i></button>';
@@ -100,7 +94,6 @@ for ($i=0; $i<count($divs);$i++){
 //---------------------------------------------------------
 		 else
 			 echo '<div class="panel-body cust'.$divs[$i]['id_diva'].'">';
-		
 		
 //========================== Subdivy malejąco ================================		
 			 $sdiv = new sdiv();
@@ -123,7 +116,6 @@ for ($i=0; $i<count($divs);$i++){
 				echo '</div>';
 					
 				}*/
-
 			echo '</div>';
 			echo '</div>';
 	}

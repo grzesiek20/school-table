@@ -1,3 +1,4 @@
+
 <?php
     header("Content-type: text/css; charset: UTF-8");
 	
@@ -11,6 +12,11 @@ body
 	color: #ffffff;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
+}
+
+.panel{
+	border-style:none !important;
+	position:absolute !important;
 }
 
 .buttoncustom{
@@ -85,7 +91,6 @@ body
 			echo "text-align:".$divs[$i]['textalign'].";\n";
 			echo "z-index:1;\n";
 			echo "}\n\n";
-
 			echo ".cust".$divs[$i]['id_diva']."{\n";
 			echo "font-size:".$divs[$i]['fontsize']."px;\n";
 			echo "}\n";

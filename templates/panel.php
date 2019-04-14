@@ -149,7 +149,7 @@ class div
 	
 	function updateDivLocation()
     {
-		$sql="UPDATE `divy` SET `per_width` = '".$this->per_width."', `height` = '".$this->height."', `per_leftm` = '".$this->per_leftm."', `topm` = '".$this->topm."' WHERE `id_diva` ='".$this->id_diva."';";
+		$sql="UPDATE `location` SET `per_width` = '".$this->per_width."', `height` = '".$this->height."', `per_leftm` = '".$this->per_leftm."', `topm` = '".$this->topm."' WHERE `id_diva` ='".$this->id_diva."';";
 
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
     }

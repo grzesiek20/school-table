@@ -42,6 +42,7 @@
                     <h3>Edycja treści</h3>
                 </div>
                 <div class="panel-body">
+				<?php if(isset($_SESSION['Error'])) echo $_SESSION['Error']; ?>
                     <form method="post" action="../database/content/contentedit.php">
 						
 							<div class="col-md-12">

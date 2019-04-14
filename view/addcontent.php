@@ -28,6 +28,7 @@
 	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="../js/date.js"></script>
 
 </head>
 
@@ -40,6 +41,7 @@
                     <h3>Dodawanie treści</h3>
                 </div>
                 <div class="panel-body">
+				<?php if(isset($_SESSION['Error'])) echo $_SESSION['Error']; ?>
                     <form method="post" action="../database/content/contentedit.php">
 							<div class="col-md-12">
 								<label for="content" class="control-label">Treść</label>
@@ -54,13 +56,13 @@
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="begdate" class="control-label">Data początkowa</label>';
-													echo '<input type="date" value="" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
+													echo '<input readonly="readonly" value="" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
 												echo '</div>';
 											echo '</div>';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="enddate" class="control-label">Data końcowa</label>';
-													echo '<input type="date" value="" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
+													echo '<input readonly="readonly" value="" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
 												echo '</div>';
 											echo '</div>';
 									echo '</div>';
@@ -70,6 +72,13 @@
                         <div class="pull-left">
                             <input type="submit" id="add" name="add" value="Dodaj" class="btn btn-custom">
                         </div>
+						<?php
+						if($_GET['id']==11 || $_GET['id']==11){
+						echo '<div class="pull-right">';
+							echo '<button type="button" onclick="resetnews()" id="newsreset" name="newsreset"  class="btn btn-custom">Resetuj daty</button>';
+                        echo '</div>';
+						}
+						?>
                     </form>
                 </div>
             </div>
