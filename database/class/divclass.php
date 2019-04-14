@@ -1,5 +1,5 @@
 <?php
-	
+	require_once __DIR__."/../htmlpurifier/library/HTMLPurifier.auto.php";
 class div 
 {
 	private $id_diva;
@@ -141,28 +141,29 @@ class div
 	function addDiv()
     {
 		/////////////////////escape string///////////////////////////////
-		mysqli_escape_string($this->hDB, $this->getHeader());
-
+		//mysqli_escape_string($this->hDB, $this->getHeader());
 
 		////////////////////HTML entities/////////////////////////////////
-		$headerText = htmlentities($this->getHeader(), ENT_QUOTES, "UTF-8"); 
+		//$headerText = strip_tags($this->getHeader()); 
 
 		
-		$sql="INSERT INTO `divy` (`id_diva`,`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`) VALUES(NULL,'".mysqli_escape_string($this->hDB, $this->getHeader())."','".$this->headercolor."','".$this->headerfcolor."','".$this->headerfsize."','".$this->bgcolor."','".$this->fontsize."','".$this->fontcolor."','".$this->topm."','".$this->height."','".$this->per_width."') ;";
+		// $sql="INSERT INTO `divy` (`id_diva`,`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`) VALUES(NULL,'".htmlentities($this->getHeader())."','".$this->headercolor."','".$this->headerfcolor."','".$this->headerfsize."','".$this->bgcolor."','".$this->fontsize."','".$this->fontcolor."','".$this->topm."','".$this->height."','".$this->per_width."') ;";
 
-		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
+		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
 		//$query = "INSERT INTO slider (id_slider, height) VALUES (?,?)";
 
 		///////////////////////////parametrized query//////////////////////////////////////////////////
-		// $query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`)VALUES(?,?,?,?,?,?,?,?,?,?);";
+		$config = HTMLPurifier_Config::createDefault();
+		$purifier = new HTMLPurifier($config);
+		$query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`)VALUES(?,?,?,?,?,?,?,?,?,?);";
 
-		// $stmt = $this->hDB->prepare($query);
+		$stmt = $this->hDB->prepare($query);
 
-		// $stmt->bind_param("sssisisiii", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->topm, $this->height, $this->per_width);
+		$stmt->bind_param("sssisisiii", $purifier->purify($this->headertext), $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->topm, $this->height, $this->per_width);
 
-		// /* Execute the statement */
-		// $stmt->execute();
-		// $stmt->close();
+		/* Execute the statement */
+		$stmt->execute();
+		$stmt->close();
     }
 	
 	function updateDiv()

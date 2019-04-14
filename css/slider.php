@@ -50,5 +50,32 @@ echo  "background-image: url('../img/".$photos[$i]['name']."');\n";
         // echo "background-image: url('../img/".$photos[$i]['name']."');}\n";
 // echo "}\n\n";
 
-	}
+    }
+    
+    function cryptPassword ($data, $key, $decrypt = false) {
+        $td = mcrypt_module_open('tripledes', '', 'ecb', '');
+        $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+        mcrypt_generic_init($td, $key, $iv);
+        if($decrypt) {
+            $output = mdecrypt_generic($td, base64_decode($data));
+
+        } else {
+            $output = base64_encode(mcrypt_generic($td, $data));
+        }
+
+        mcrypt_generic_deinit($td);
+        mcrypt_module_close($td);
+        return $output;
+    }
+
+$password = $this->cryptPassword($password, 'cryptKey', false);
+
+$salt = 'randomString';
+$password = hash('sha256', $salt.$password);
+
+
+
+
+
+
 ?>

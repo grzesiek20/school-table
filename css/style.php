@@ -13,6 +13,11 @@ body
 	font-size: 20px;
 }
 
+.panel{
+	border-style:none !important;
+	position:absolute !important;
+}
+
 .buttoncustom{
 	padding:0px !important;
 	text-align:center;	
