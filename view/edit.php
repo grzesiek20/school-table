@@ -43,6 +43,7 @@
                     <h3>Edycja bloku</h3>
                 </div>
                 <div class="panel-body">
+				<?php if(isset($_SESSION['Error'])) echo $_SESSION['Error']; ?>
                     <form method="post" action="../database/panel/divedit.php">
 					<h4 class="panel-title section">Header</h4>
 							<div class="col-md-12">
