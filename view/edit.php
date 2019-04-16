@@ -113,6 +113,19 @@
 												<input type="radio" <?php if($textalign=="justify") {echo "checked";}?> value="justify" class="form-control" placeholder="Rozmieszczenie tekstu" id="textalign" name="textalign"><h6 class="section text-center">Wyjustuj</h6>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-2 pull-right">
+											<?php
+											if($_GET['id']!=2&&
+													$_GET['id']!=3&&
+													$_GET['id']!=4&&
+													$_GET['id']!=5&& // jeśli inne, niż wszystkie z wyświetlanym JavaScriptem, to możliwośc dodawania treści
+													$_GET['id']!=8&&
+													$_GET['id']!=10)
+												echo '<div class="pull-right ico"><a href="addcontent.php?id='.$_GET['id'].'"><i class="icon-plus-2 icons"></i></a></div>';
+											?>
+										</div>
+									</div>
 										<?php 
 								//============ blok z losowaniem==================
 											if($_GET['id']==8)
@@ -184,21 +197,10 @@
 								<input type="hidden" value="<?php echo $sdivs[$i]['id_sdiv']; ?>" class="form-control" placeholder="Treść" id="id_sdiv" name="id_sdiv">
 								
 							</div>
-                        <div class="pull-left">
-                            <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-custom">
+                        <div class="pull-right">
+							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
+                            <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-primary">
                         </div>
-						<div class="col-md-2 pull-right">
-						<?php
-						if($_GET['id']!=2&&
-								$_GET['id']!=3&&
-								$_GET['id']!=4&&
-								$_GET['id']!=5&& // jeśli inne, niż wszystkie z wyświetlanym JavaScriptem, to możliwośc dodawania treści
-								$_GET['id']!=8&&
-								$_GET['id']!=10)
-							echo '<div class="pull-right ico"><a href="addcontent.php?id='.$_GET['id'].'"><i class="icon-plus-2 icons"></i></a></div>';
-						?>
-						</div>
-					
                     </form>
 				</div>
              </div>

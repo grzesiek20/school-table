@@ -11,10 +11,14 @@ $div = new div();
 $sdiv = new sdiv();
 $randomize = new randomize();
 
-
+//unset($Error);
+if(isset($_POST['back'])){
+	unset($_SESSION['Error']);
+	header('Location: ../../index.php');
+	exit;	
+}
 
 	if(isset($_POST['submit'])){
-			
 			//$header = htmlentities($_POST['header'], ENT_QUOTES, "UTF-8");
 		$div->setIdDiv($_POST['id_diva']);
 		$div->setHeader($_POST['header']);
@@ -31,7 +35,6 @@ $randomize = new randomize();
 		$div->setHeaderfsize($_POST['headerfsize']);
 
 		$div->setBgcolor(validator::formatColor($_POST['bgcolor']));
-		$Error = $div->getBgcolor();
 		if (validator::checkColor($_POST['bgcolor']) != true) {
 			$Error = "Wrong panel background color!";
 		}
@@ -59,19 +62,19 @@ $randomize = new randomize();
 		}
 	}
 		
-		if(isset($_POST['yes'])){
+	if(isset($_POST['yes'])){
 		$div->deleteDiv($_POST['id_diva']);
 				
-					header('Location: ../../index.php');
-					exit;	
+		header('Location: ../../index.php');
+		exit;	
 
-			}
+	}
 			
-			if(isset($_POST['no'])){
-	
-			header('Location: ../../index.php');
-			exit;	
-		}
+	if(isset($_POST['no'])){
+
+		header('Location: ../../index.php');
+		exit;	
+	}
 		
 			if(isset($_POST['reset'])){
 				$randomize->resetLos();
