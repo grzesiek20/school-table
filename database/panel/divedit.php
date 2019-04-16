@@ -25,25 +25,25 @@ if(isset($_POST['back'])){
 
 		$div->setHeadercolor(validator::formatColor($_POST['headercolor']));
 		if (validator::checkColor($div->getHeadercolor()) != true) {
-			$Error = "Wrong header color!";
+			$Error = "Zły kolor nagłówka!";
 		}
 		$div->setHeaderfcolor(validator::formatColor($_POST['headerfcolor']));
 		if (validator::checkColor($div->getHeaderfcolor()) != true) {
-			$Error = "Wrong header font color!";
+			$Error = "Zły kolor czcionki nagłówka!";
 		}
 			
 		$div->setHeaderfsize($_POST['headerfsize']);
 
 		$div->setBgcolor(validator::formatColor($_POST['bgcolor']));
 		if (validator::checkColor($_POST['bgcolor']) != true) {
-			$Error = "Wrong panel background color!";
+			$Error = "Zły kolor tła!";
 		}
 
 		$div->setFontsize($_POST['fontsize']);
 
 		$div->setFontcolor(validator::formatColor($_POST['fontcolor']));
 		if (validator::checkColor($div->getFontcolor()) != true) {
-			$Error = "Wrong font color!";
+			$Error = "Zły kolor czcionki!";
 		}
 		$div->setTextalign($_POST['textalign']);
 		
@@ -76,19 +76,15 @@ if(isset($_POST['back'])){
 		exit;	
 	}
 		
-			if(isset($_POST['reset'])){
-				$randomize->resetLos();
-
-				
-					header('Location: ../../index.php');
-					exit;	
-
-			}
-			else{
-				$div->getDiv($_GET['id']);
-				$sdiv->getAllDESC($_GET['id']);
-				$textalign= $div->getTextalign();
-			}
+	if(isset($_POST['reset'])){
+		$randomize->resetLos();
+		header('Location: ../../index.php');
+		exit;	
+	} else {
+		$div->getDiv($_GET['id']);
+		$sdiv->getAllDESC($_GET['id']);
+		$textalign= $div->getTextalign();
+	}
 
 
 // class Subt

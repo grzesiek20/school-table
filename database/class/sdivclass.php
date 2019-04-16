@@ -269,14 +269,14 @@ class sdiv
 		
 		$sql = "SELECT * FROM `body` WHERE id_diva=11 AND active=1 AND visible=1 AND ((begdate<=CURRENT_DATE() AND enddate>=CURRENT_DATE()) OR (begdate='0000-00-00' AND enddate='0000-00-00')) ORDER BY id_sdiv DESC;";
 		
-		 if($data = $this->hDB->query($sql))
-			 $ile_wierszy = $data->num_rows;
-		
-		 $post=$data->fetch_array();
-		 $news=$post['content'];
-		 while($post=$data->fetch_array()){
-			 $news=$news.";;".$post['content'];
-		 }
+		if($data = $this->hDB->query($sql))
+			$ile_wierszy = $data->num_rows;
+	
+		$post=$data->fetch_array();
+		$news=$post['content'];
+		while($post=$data->fetch_array()){
+			$news=$news.";;".$post['content'];
+		}
 		
 		return $news."~".$ile_wierszy;
 		
