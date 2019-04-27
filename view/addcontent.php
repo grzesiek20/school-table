@@ -56,13 +56,23 @@
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="begdate" class="control-label">Data początkowa</label>';
-													echo '<input readonly="readonly" value="" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
+													echo '<input readonly="readonly" value="';
+													if(isset($_SESSION['begdate'])){
+														echo $_SESSION['begdate'];
+														unset($_SESSION['begdate']);
+													}
+													echo '" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
 												echo '</div>';
 											echo '</div>';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="enddate" class="control-label">Data końcowa</label>';
-													echo '<input readonly="readonly" value="" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
+													echo '<input readonly="readonly" value="';
+													if(isset($_SESSION['enddate'])){
+														echo $_SESSION['enddate'];
+														unset($_SESSION['enddate']);
+													}
+													echo '" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
 												echo '</div>';
 											echo '</div>';
 									echo '</div>';

@@ -42,7 +42,9 @@
                     <h3>Edycja treści</h3>
                 </div>
                 <div class="panel-body">
-				<?php if(isset($_SESSION['Error'])) echo $_SESSION['Error']; ?>
+				<?php if(isset($_SESSION['Error'])) {
+					echo $_SESSION['Error'];
+					unset($_SESSION['Error']);} ?>
                     <form method="post" action="../database/content/contentedit.php">
 						
 							<div class="col-md-12">
@@ -57,20 +59,41 @@
 									echo '<div class="col-md-12">';
 										echo '<label for="content" class="control-label">Treść '.$i.'</label>';
 										echo'</br>';
-										echo '<textarea class="form-control" id="content" name="content">'.$sdiv->getContent().'</textarea>';
+										echo '<textarea class="form-control" id="content" name="content">';
+										if(isset($_SESSION['content'])){
+											echo $_SESSION['content'];
+											unset($_SESSION['content']);
+										} else {
+											echo $sdiv->getContent();
+										}
+										echo '</textarea>';
 									if($div==11 || $div==9) // jeśli slider z komunikatami, to dodaj daty do wyświetlania
 									{
 										echo '<div class="row">';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="begdate" class="control-label">Data początkowa</label>';
-													echo '<input readonly="readonly" value="'.$sdiv->getBegdate().'" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
+													echo '<input readonly="readonly" value="';
+													if(isset($_SESSION['begdate'])){
+														echo $_SESSION['begdate'];
+														unset($_SESSION['begdate']);
+													} else {
+														echo $sdiv->getBegdate();
+													}
+													echo '" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
 												echo '</div>';
 											echo '</div>';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
 													echo '<label for="enddate" class="control-label">Data końcowa</label>';
-													echo '<input readonly="readonly" value="'.$sdiv->getEnddate().'" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
+													echo '<input readonly="readonly" value="';
+													if(isset($_SESSION['enddate'])){
+														echo $_SESSION['enddate'];
+														unset($_SESSION['enddate']);
+													} else {
+														echo $sdiv->getEnddate();
+													}
+													echo '" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
 												echo '</div>';
 											echo '</div>';
 									echo '</div>';
