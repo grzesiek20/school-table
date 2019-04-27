@@ -51,25 +51,49 @@
 								<div class="col-md-4">
 									<div class="form-group label-floating">
 										<label for="headercolor" class="control-label">Kolor nagłówka</label>
-										<input type="color" value="<?php echo $div->getHeadercolor(); ?>" class="form-control" placeholder="Kolor nagłówka" id="headercolor" name="headercolor">
+										<input type="color" value="<?php
+										if (isset($_SESSION['headercolor'])){
+											echo $_SESSION['headercolor'];
+											unset($_SESSION['headercolor']);
+										} else {
+											echo $div->getHeadercolor();
+										}?>" class="form-control" placeholder="Kolor nagłówka" id="headercolor" name="headercolor">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group label-floating">
 										<label for="headerfcolor" class="control-label">Kolor czcionki</label>
-										<input type="color" value="<?php echo $div->getHeaderfcolor(); ?>" class="form-control" placeholder="Kolor czcionki" id="headerfcolor" name="headerfcolor">
+										<input type="color" value="<?php 
+										if (isset($_SESSION['headerfcolor'])){
+											echo $_SESSION['headerfcolor'];
+											unset($_SESSION['headerfcolor']);
+										} else {
+											echo $div->getHeaderfcolor();
+										} ?>" class="form-control" placeholder="Kolor czcionki" id="headerfcolor" name="headerfcolor">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group label-floating">
 										<label for="headerfsize" class="control-label">Rozmiar czcionki</label>
-										<input type="number" value="<?php echo $div->getHeaderfsize(); ?>" class="form-control" placeholder="Rozmiar czcionki" id="headerfsize" name="headerfsize">
+										<input type="number" value="<?php 
+										if (isset($_SESSION['headerfsize'])){
+											echo $_SESSION['headerfsize'];
+											unset($_SESSION['headerfsize']);
+										} else {
+											echo $div->getHeaderfsize();
+										}?>" class="form-control" placeholder="Rozmiar czcionki" id="headerfsize" name="headerfsize">
 									</div>
 								</div>
 							</div>
 								<div class="form-group label-floating">
 									<label for="header" class="control-label">Nagłówek</label>
-									<input type="text" value="<?php echo $div->getHeader(); ?>" class="form-control" placeholder="Nagłówek" id="header" name="header">
+									<input type="text" value="<?php 
+									if (isset($_SESSION['header'])){
+										echo $_SESSION['header'];
+										unset($_SESSION['header']);
+									} else {
+										echo $div->getHeader(); 
+									}?>" class="form-control" placeholder="Nagłówek" id="header" name="header">
 									
 									<input type="hidden" value="<?php echo $_GET['id']; ?>" class="form-control" placeholder="id_diva" id="id_diva" name="id_diva">
 								</div>
@@ -81,19 +105,37 @@
 									<div class="col-md-4">
 										<div class="form-group label-floating">
 											<label for="bgcolor" class="control-label">Kolor bloku</label>
-											<input type="color" value="<?php echo $div->getBgcolor(); ?>" class="form-control" placeholder="Kolor bloku" id="bgcolor" name="bgcolor">
+											<input type="color" value="<?php
+											if (isset($_SESSION['bgcolor'])){
+												echo $_SESSION['bgcolor'];
+												unset($_SESSION['bgcolor']);
+											} else {
+												echo $div->getBgcolor();
+											}?>" class="form-control" placeholder="Kolor bloku" id="bgcolor" name="bgcolor">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group label-floating">
 											<label for="fontcolor" class="control-label">Kolor czcionki</label>
-											<input type="color" value="<?php echo $div->getFontcolor(); ?>" class="form-control" placeholder="Kolor czcionki" id="fontcolor" name="fontcolor">
+											<input type="color" value="<?php
+											if (isset($_SESSION['fontcolor'])){
+												echo $_SESSION['fontcolor'];
+												unset($_SESSION['fontcolor']);
+											} else {
+												echo $div->getFontcolor();
+											}?>" class="form-control" placeholder="Kolor czcionki" id="fontcolor" name="fontcolor">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group label-floating">
 											<label for="fontsize" class="control-label">Rozmiar czcionki</label>
-											<input type="number" value="<?php echo $div->getFontsize(); ?>" class="form-control" placeholder="Rozmiar czcionki" id="fontsize" name="fontsize">
+											<input type="number" value="<?php
+											if (isset($_SESSION['fontsize'])){
+												echo $_SESSION['fontsize'];
+												unset($_SESSION['fontsize']);
+											} else {
+												echo $div->getFontsize();
+											}?>" class="form-control" placeholder="Rozmiar czcionki" id="fontsize" name="fontsize">
 										</div>
 									</div>
 								</div>

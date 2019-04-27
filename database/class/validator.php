@@ -20,5 +20,9 @@ class validator
     function checkNumber($number) {
         return (bool)preg_match("/[0-9]+/",$color);
     }
+
+    function checkLogin($login) {
+        return (bool)ctype_alnum($login);
+    }
  }
 ?>

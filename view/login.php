@@ -9,7 +9,7 @@ $options['disable_flash_fallback'] = false; // allow flash fallback
 	{
 		header('Location: ../index.php');
 		exit();
-	} 
+	}
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +69,10 @@ $options['disable_flash_fallback'] = false; // allow flash fallback
                             <input type="submit" id="submit"class="btn btn-primary btn-raised" value="Zaloguj">
                         </div>	
                         <!-- <input type="" value="" name="recaptcha_response" id="recaptcha_response"> -->
-					<?php if(isset($_SESSION['blad'])) echo $_SESSION['blad'];?>
+					<?php if(isset($_SESSION['blad'])) {
+                        echo $_SESSION['blad'];
+                        unset($_SESSION['blad']);
+                    }?>
                     </form>
 
               </div>

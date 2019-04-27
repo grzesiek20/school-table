@@ -135,6 +135,17 @@ $stmt->close();
 // 			 exit;
 // 		}
 	}
+
+	function addUser() {
+		$salt = substr(md5(rand()), 0, 7);
+		$password = md5($this->password.$salt);
+		$query = "INSERT INTO `user`(`name`, `surname`, `login`, `password`, `salt`) VALUES (?,?,?,?,?)";
+		$stmt = $this->hDB->prepare($query);
+		$stmt->bind_param("sssss", $this->name, $this->surname, $this->login, $password, $salt);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		unset($_SESSION['blad']);
+	}
 	
 	function getAll() {
 		
