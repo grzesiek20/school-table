@@ -1,4 +1,8 @@
 <?php
+require_once('../securimage/securimage.php');
+$options = array();
+$options['input_name']             = 'captcha_input'; // change name of input element for form post
+$options['disable_flash_fallback'] = false; // allow flash fallback
 	session_start();
 	
 	 if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
@@ -20,6 +24,19 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>			
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">	
 		<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+        <!-- <script src="https://www.google.com/recaptcha/api.js?render=6Ld8gJ8UAAAAAMZ7x1w6scSaHaIXDFMfhVuMl1_g"></script> -->
+  <!-- <script>
+        var recaptchaResponse = 0;
+        grecaptcha.ready(function() {
+        grecaptcha.execute('6Ld8gJ8UAAAAAMZ7x1w6scSaHaIXDFMfhVuMl1_g', {action: 'homepage'}).then(function(token) {
+
+    //your code to be executed after 1 second
+        var recaptchaResponse = document.getElementById('recaptcha_response');
+        console.log(recaptchaResponse);
+        recaptchaResponse.value = token;
+      });
+  });
+  </script> -->
 </head>
 <body>	
 <br/><br/>
@@ -41,12 +58,14 @@
 							<label for="password" class="control-label">Hasło</label>
                             <input type="password" class="form-control" id="password" name="password">
                          </div>
+                         <div id='captcha_container_1'>
+                          <?php echo Securimage::getCaptchaHtml($options); ?>
+                        </div>
                         <div class="pull-right">
-                            <input type="submit" class="btn btn-primary btn-raised" value="Zaloguj">
+                            <input type="submit" id="submit"class="btn btn-primary btn-raised" value="Zaloguj">
                         </div>	
-					<?php
-						if(isset($_SESSION['blad'])) echo $_SESSION['blad'];
-					?>
+                        <!-- <input type="" value="" name="recaptcha_response" id="recaptcha_response"> -->
+					<?php if(isset($_SESSION['blad'])) echo $_SESSION['blad'];?>
                     </form>
 
               </div>

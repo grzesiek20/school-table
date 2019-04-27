@@ -99,7 +99,8 @@
 									</div>
 								</div>
 							</div>
-                        <div class="pull-left">
+                        <div class="pull-right">
+							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
                             <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-custom">
                         </div>
                     </form>

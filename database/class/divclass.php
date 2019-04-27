@@ -1,5 +1,6 @@
 <?php
-	
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
 class div 
 {
 	private $id_diva;
@@ -170,14 +171,35 @@ class div
 
 		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
 		//$query = "INSERT INTO slider (id_slider, height) VALUES (?,?)";
-		$query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`)VALUES(?,?,?,?,?,?,?,?,?,?);";
 
-		$stmt = $this->hDB->prepare($query);
+		// INSERT INTO
+		// `divy`
+		// (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`)
+		// VALUES("Lol","1234","34534",20,"2323",20,"132");
+		// INSERT INTO `location`
+		// (`id_diva`, `height`, `per_width`, `topm`, `per_leftm`) 
+		// VALUES (LAST_INSERT_ID(),30,20,20,20);
+		//$query = "START_TRANSACTION;";
+		$query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`) VALUES (?,?,?,?,?,?,?);";
+		//$query .= "INSERT INTO `location`(`id_diva`, `height`, `per_width`, `topm`, `per_leftm`) VALUES (LAST_INSERT_ID(),'?','?','?','?');";
+		//$query .= "COMMIT;";
+		
+		if($stmt = $this->hDB->prepare($query)) { // assuming $mysqli is the connection
+			$stmt->bind_param("sssisis", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor);
+			$stmt->execute();
+			// any additional code you need would go here.
+		} else {
+			$error = $this->hDB->errno . ' ' . $this->hDB->error;
+			echo $error; // 1054 Unknown column 'foo' in 'field list'
+		}
+		
+		
+		// $stmt = $this->hDB->prepare($query);
 
-		$stmt->bind_param("sssisisiii", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->topm, $this->height, $this->per_width);
+		// $stmt->bind_param("sssisisiiii", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor, $this->height, $this->per_width, $this->topm, $this->per_leftm);
 
-		/* Execute the statement */
-		$stmt->execute();
+		// /* Execute the statement */
+		// $stmt->execute();
 		$stmt->close();
     }
 	

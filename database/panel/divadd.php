@@ -24,5 +24,11 @@
 
 			 }
 
+			 if(isset($_POST['back'])){
+				unset($_SESSION['Error']);
+				header('Location: ../../index.php');
+				exit;	
+			}
+
 
 ?>

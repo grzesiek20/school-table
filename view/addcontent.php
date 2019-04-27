@@ -69,12 +69,13 @@
 							}
 							?>
 							</div>
-                        <div class="pull-left">
+                        <div class="pull-right">
+							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
                             <input type="submit" id="add" name="add" value="Dodaj" class="btn btn-custom">
                         </div>
 						<?php
 						if($_GET['id']==11 || $_GET['id']==11){
-						echo '<div class="pull-right">';
+						echo '<div class="pull-left">';
 							echo '<button type="button" onclick="resetnews()" id="newsreset" name="newsreset"  class="btn btn-custom">Resetuj daty</button>';
                         echo '</div>';
 						}

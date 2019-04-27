@@ -1,4 +1,5 @@
 <?php
+ error_reporting(E_ALL); ini_set('display_errors', 1);
 class user
 {
 	private $id_user;
@@ -44,6 +45,7 @@ class user
 	
 	
 	function checkUser(){
+		unset($_SESSION['blad']);
 		// $sql = "SELECT id_user, name, surname FROM `user` WHERE login='".$this->login."' AND password='".$this->password."';";
 		
 		// $rs = $this->hDB->query($sql);
@@ -65,52 +67,67 @@ class user
 		// }
 //////////////////////////////////////////////////////////////////////
 ////////////////////////Parametrized//////////////////////////////////
-$query = "SELECT id_user, name, surname FROM `user` WHERE login=? AND password=?;";
+$query1="SELECT `salt` FROM `user` WHERE `login`=?;";
+$stmt1 = $this->hDB->prepare($query1);
+$stmt1->bind_param("s", $this->login);
+$stmt1->execute();
+$result = $stmt1->get_result();
+
+
+if ($result && $result->num_rows == 1) {
+	$row = $result->fetch_array();
+	$password = md5($_POST['password'].$row['salt']);
+} else {
+	$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+		header('Location: ../view/login.php');
+		exit;
+}
+
+$query = "SELECT `id_user`, `name`, `surname` FROM `user` WHERE `login`=? AND `password`=?;";
 $stmt = $this->hDB->prepare($query);
-$stmt->bind_param("ss", $this->login, $this->password);
+$stmt->bind_param("ss", $this->login, $password);
 $stmt->execute();
 $result = $stmt->get_result();
-$row = $result->fetch_array();
-echo $row;
-$stmt->close();
-		if($row)
+
+		if($result && $result->num_rows == 1)
 		{
 		$data = $result->fetch_array();
 			$_SESSION['id_user']= $data['id_user'];
 			$_SESSION['name'] = $data['name'];
 			$_SESSION['surname'] = $data['surname'];
 			$_SESSION['zalogowany'] = true;
-			 unset($_SESSION['blad']);
-			 header('Location: ../index.php');
-			 exit;
+			unset($_SESSION['blad']);
+			header('Location: ../index.php');
+			exit;
 		}
 		else {
-			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-			 header('Location: ../view/login.php');
-			 exit;
+			$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+			header('Location: ../view/login.php');
+			exit;
 		}
+$stmt->close();
 //////////////////////////////Escape string/////////////////////////////////////////////////////
 		
-$sql = "SELECT id_user, name, surname FROM `user` WHERE login=grzegorz AND password=password;";
+// $sql = "SELECT id_user, name, surname FROM `user` WHERE login=grzegorz AND password=password;";
 		
-		$rs = $this->hDB->query($sql);
-		$ile = $rs->num_rows;
-		if($ile>0)
-		{
-		$data = $rs->fetch_array();
-			$_SESSION['id_user']= $data['id_user'];
-			$_SESSION['name'] = $data['name'];
-			$_SESSION['surname'] = $data['surname'];
-			$_SESSION['zalogowany'] = true;
-			 unset($_SESSION['blad']);
-			 header('Location: ../index.php');
-			 exit;
-		}
-		else {
-			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-			 header('Location: ../view/login.php');
-			 exit;
-		}
+// 		$rs = $this->hDB->query($sql);
+// 		$ile = $rs->num_rows;
+// 		if($ile>0)
+// 		{
+// 		$data = $rs->fetch_array();
+// 			$_SESSION['id_user']= $data['id_user'];
+// 			$_SESSION['name'] = $data['name'];
+// 			$_SESSION['surname'] = $data['surname'];
+// 			$_SESSION['zalogowany'] = true;
+// 			 unset($_SESSION['blad']);
+// 			 header('Location: ../index.php');
+// 			 exit;
+// 		}
+// 		else {
+// 			 $_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+// 			 header('Location: ../view/login.php');
+// 			 exit;
+// 		}
 	}
 	
 	function getAll() {

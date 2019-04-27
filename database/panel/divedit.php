@@ -15,7 +15,7 @@ $randomize = new randomize();
 if(isset($_POST['back'])){
 	unset($_SESSION['Error']);
 	header('Location: ../../index.php');
-	exit;	
+	exit;
 }
 
 	if(isset($_POST['submit'])){

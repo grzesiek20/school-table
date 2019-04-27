@@ -49,6 +49,13 @@ if(isset($_POST['add'])){
 		header("Location: ../../view/addcontent.php");
 	}
 }
+
+//unset($Error);
+if(isset($_POST['back'])){
+	unset($_SESSION['Error']);
+	header("Location: ../../view/edit.php?id=".$_POST['id_div']);
+	exit;
+}
 	
 if(isset($_POST['submit'])){
 	//$content = htmlentities($_POST['content'], ENT_QUOTES, "UTF-8");

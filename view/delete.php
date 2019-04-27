@@ -45,19 +45,17 @@
                 <div class="panel-body">
                     <form method="post" action="../database/panel/divedit.php">
 					<p class="panel-title section">Czy na pewno chcesz usunąć wybrany blok?</p>
-							<div class="col-md-12">
-							<div class="row">
-								 <div class="col-md-3 col-md-offset-3">
-									<input type="submit" id="yes" name="yes" value="Tak" class="btn btn-custom">
-								</div>
-								<div class="col-md-3">
-									<input type="submit" id="no" name="no" value="Nie" class="btn btn-custom">
-								</div>
+						<div class="col-md-12">
+						<div class="row">
+								<div class="col-md-3 col-md-offset-3">
+								<input type="submit" id="yes" name="yes" value="Tak" class="btn btn-custom">
 							</div>
-									<input type="hidden" value="<?php echo $div->getIdDiv(); ?>" class="form-control" placeholder="id_diva" id="id_diva" name="id_diva">
+							<div class="col-md-3">
+								<input type="submit" id="no" name="no" value="Nie" class="btn btn-custom">
 							</div>
-
-                       
+						</div>
+							<input type="hidden" value="<?php echo $div->getIdDiv(); ?>" class="form-control" placeholder="id_diva" id="id_diva" name="id_diva">
+						</div>
                     </form>
                 </div>
             </div>

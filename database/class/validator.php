@@ -16,5 +16,9 @@ class validator
         }
         return $color;
     }
+
+    function checkNumber($number) {
+        return (bool)preg_match("/[0-9]+/",$color);
+    }
  }
 ?>

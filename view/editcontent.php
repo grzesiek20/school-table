@@ -81,12 +81,13 @@
 								<input type="hidden" value="<?php echo $sdiv->getIdSdiv(); ?>" class="form-control" placeholder="Treść" id="id_sdiv" name="id_sdiv">
 								<input type="hidden" value="<?php echo $sdiv->getIdDiv(); ?>" class="form-control" placeholder="id" id="id_div" name="id_div">
 							</div>
-                        <div class="pull-left">
+                        <div class="pull-right">
+							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
                             <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-custom">
                         </div>
 						<?php
 						if($div==11 || $div==9){
-						echo '<div class="pull-right">';
+						echo '<div class="pull-left">';
 							echo '<button type="button" onclick="resetnews()" id="newsreset" name="newsreset"  class="btn btn-custom">Resetuj daty</button>';
                         echo '</div>';
 						}
