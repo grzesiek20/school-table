@@ -53,9 +53,11 @@ for ($i=0; $i<count($divs);$i++){
 					if (isset($_SESSION['zalogowany'])) {
 						echo '<div class="pull-left icolog"><a href="database/logout.php"><i class="icon-logout icons"></i></a></div>'; //wylogowanie
 						echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
+						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
+						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-user-plus icons"></i></a></div>';
 						echo '<div class="pull-right ico"><a href="view/delete.php?id='.$divs[$i]['id_diva'].'"><i class="icon-trash icons"></i></a></div>';
 						echo '<div class="pull-right ico"><a href="view/edit1.php?id='.$divs[$i]['id_diva'].'"><i class="icon-cog icons"></i></a></div>';
-						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
+						
 					} else {
 						echo '<div class="pull-left icolog"><a href="view/login.php"><i class="icon-login icons"></i></a></div>'; //logowanie
 					}				
