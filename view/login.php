@@ -57,10 +57,14 @@ $options['disable_flash_fallback'] = false; // allow flash fallback
                         <div class="form-group label-floating"> 
 							<label for="password" class="control-label">Hasło</label>
                             <input type="password" class="form-control" id="password" name="password">
-                         </div>
-                         <div id='captcha_container_1'>
-                          <?php echo Securimage::getCaptchaHtml($options); ?>
                         </div>
+                        <?php
+                        if (isset($_SESSION['wronglogins']) && $_SESSION['wronglogins'] >= 3){
+                            echo "<div id='captcha_container_1'>";
+                            echo Securimage::getCaptchaHtml($options); 
+                            echo  "</div>";
+                        }
+                        ?> 
                         <div class="pull-right">
                             <input type="submit" id="submit"class="btn btn-primary btn-raised" value="Zaloguj">
                         </div>	

@@ -6,6 +6,9 @@
 	
 	$user= new user();
 	unset($_SESSION['blad']);
+	if (!isset($_SESSION['wronglogins'])){
+		$_SESSION['wronglogins'] = 0;
+	}
 //  if (isset($_SESSION['zalogowany']) &&($_SESSION['zalogowany'] == true))
 // 	 {
 // 		 header('Location: ../index.php');
@@ -19,18 +22,27 @@
 // {
 	// $login = htmlentities($_POST['login'], ENT_QUOTES, "UTF-8");
 	// $password = htmlentities($_POST['password'], ENT_QUOTES, "UTF-8");
-if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['captcha_input'])){
+if (isset($_POST['login']) && isset($_POST['password'])){
 	// && isset($_POST['captcha_input']
 	$login = $_POST['login'];
 	$password = $_POST['password'];
-	$securimage = new Securimage();
-	$captcha = $_POST['captcha_input'];
-  
-	if ($securimage->check($captcha) == false) {
-	  	$_SESSION['blad'] = '<span style="color:red">Kod z obrazka jest błędny!</span>';
-		header('Location: ../view/login.php');
-		exit;
-	} else {
+
+	if($_SESSION['wronglogins'] >= 3) {
+		$securimage = new Securimage();
+		$captcha = $_POST['captcha_input'];
+
+		if ($securimage->check($captcha) == false) {
+			$_SESSION['blad'] = '<span style="color:red">Kod z obrazka jest błędny!</span>';
+		  	header('Location: ../view/login.php');
+		  	exit;
+	  	} else {
+		$user->setLogin($login);
+		$user->setPassword($password);
+		$user->checkUser();
+	  }
+
+	}
+else {
 		$user->setLogin($login);
 		$user->setPassword($password);
 		$user->checkUser();

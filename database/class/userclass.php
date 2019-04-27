@@ -46,6 +46,9 @@ class user
 	
 	function checkUser(){
 		unset($_SESSION['blad']);
+		if (!isset($_SESSION['wronglogins'])) {
+			$_SESSION['wronglogins'] = 0;
+		}
 		// $sql = "SELECT id_user, name, surname FROM `user` WHERE login='".$this->login."' AND password='".$this->password."';";
 		
 		// $rs = $this->hDB->query($sql);
@@ -79,6 +82,7 @@ if ($result && $result->num_rows == 1) {
 	$password = md5($_POST['password'].$row['salt']);
 } else {
 	$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+	$_SESSION['wronglogins'] +=1;
 		header('Location: ../view/login.php');
 		exit;
 }
@@ -97,10 +101,12 @@ $result = $stmt->get_result();
 			$_SESSION['surname'] = $data['surname'];
 			$_SESSION['zalogowany'] = true;
 			unset($_SESSION['blad']);
+			unset($_SESSION['wronglogins']);
 			header('Location: ../index.php');
 			exit;
 		}
 		else {
+			$_SESSION['wronglogins'] +=1;
 			$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
 			header('Location: ../view/login.php');
 			exit;
