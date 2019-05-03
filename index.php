@@ -2,6 +2,15 @@
 	session_start();
 	require_once "database/initindex.php";
 	require_once "database/test.php";
+	if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] != $_COOKIE['user']) {
+		$_SESSION['blad'] = '<span style="color:red">Błąd uwierzytelniania! Zaloguj się ponownie!</span>';
+		session_unset();
+		if(isset($_COOKIE['user'])){
+			setcookie('user', '', time()-3600);
+		}
+		header('Location: ../view/login.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE HTML>
@@ -40,9 +49,9 @@
 <?php		
 //=============================== Górny blok ==================================================
 for ($i=0; $i<count($divs);$i++){
-	if($i==0){
+	if($divs[$i]['blocktype']=='headblock'){
 		echo '<div class ="tile">';
-		if (isset($_SESSION['zalogowany'])) {
+		if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
 			echo '<div class="welcome panel showico block" id="div'.$divs[$i]['id_diva'].'">';
 		} else {
 			echo '<div class="welcome panel" id="div'.$divs[$i]['id_diva'].'">';
@@ -50,7 +59,7 @@ for ($i=0; $i<count($divs);$i++){
 					echo '<div class="col-md-12 cust'.$divs[$i]['id_diva'].'">';
 					echo $divs[$i]['headertext'];
 					echo '</div>';
-					if (isset($_SESSION['zalogowany'])) {
+					if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
 						echo '<div class="pull-left icolog"><a href="database/logout.php"><i class="icon-logout icons"></i></a></div>'; //wylogowanie
 						echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
 						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
@@ -66,7 +75,7 @@ for ($i=0; $i<count($divs);$i++){
 	}
 	else{
 //================================== Pozostałe bloki =============================================
-			if (isset($_SESSION['zalogowany'])) {
+			if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
 				echo '<div class="ui-widget-content panel panel-primary block" id="div'.$divs[$i]['id_diva'].'">';
 				echo '<div class="panel-heading showico head'.$divs[$i]['id_diva'].'">';
 			} else {
@@ -78,12 +87,12 @@ for ($i=0; $i<count($divs);$i++){
 								echo $divs[$i]['headertext'];
 							echo '</div>';
 								 echo '<div class="col-md-12">';
-								 if (isset($_SESSION['zalogowany'])) {
+								 if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
 									 echo '<div class="pull-left ico"><a href="view/edit.php?id='.$divs[$i]['id_diva'].'"><i class="icon-cog icons"></i></a></div>';
 									 echo '<div class="pull-left ico"><a href="view/delete.php?id='.$divs[$i]['id_diva'].'"><i class="icon-trash icons"></i></a></div>';
 								 }
 //--------- Jeśli blok z losowaniem ----------------------------
-									if($divs[$i]['id_diva']==8){
+									if($divs[$i]['blocktype']=='drawblock'){
 										echo '<button onclick="losowanieAjax()" class="btn ico icons buttoncustom pull-right" id="randomize" name="randomize"><i class="icon-spin3 rand"></i></button>';
 									}
 //---------------------------------------------------------
@@ -91,8 +100,8 @@ for ($i=0; $i<count($divs);$i++){
 					 echo '</div>';
 				 echo '</div>';
 //---------- Jeśli blok ze zdjęciami, bez paddingu---------
-		 if($divs[$i]['id_diva']==5)
-			 echo '<div class="panel-body nopadding cust'.$divs[$i]['id_diva'].'">';
+		 if($divs[$i]['blocktype']=='sliderblock')
+			 echo '<div class="panel-body nopadding sliderblock cust'.$divs[$i]['id_diva'].'">';
 //---------------------------------------------------------
 		 else
 			 echo '<div class="panel-body cust'.$divs[$i]['id_diva'].'">';
@@ -103,10 +112,10 @@ for ($i=0; $i<count($divs);$i++){
 			
 //------------ Jeśli blok z komunikatami -----------------------------------
 		if(count($sdivs)>0){
-			 if($divs[$i]['id_diva']==11)
-				 echo '<div id="sdiv'.$sdivs[0]['id_sdiv'].'" class="anim">';	
+			 if($divs[$i]['blocktype']=='multipleblock')
+				 echo '<div id="sdiv'.$sdivs[0]['id_sdiv'].'" class="anim '.$divs[$i]['blocktype'].'">';	
 			 else 
-				 echo '<div id="sdiv'.$sdivs[0]['id_sdiv'].'">';
+				 echo '<div id="sdiv'.$sdivs[0]['id_sdiv'].'" class="'.$divs[$i]['blocktype'].'">';
 			
 				 echo '<p>'.$sdivs[0]['content'].'</p>';
 				 echo '</div>';

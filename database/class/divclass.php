@@ -4,6 +4,7 @@
 class div 
 {
 	private $id_diva;
+	private $blocktype;
 	private $height;
 	private $per_width;
 	private $topm;
@@ -89,9 +90,10 @@ class div
 		/* Execute the statement */
 		$stmt->execute();
 
-		$stmt->bind_result($id_diva, $bgcolor, $fontsize, $fontcolor, $headertext, $headercolor, $headerfsize, $headerfcolor, $textalign, $active);
+		$stmt->bind_result($id_diva, $blocktype, $bgcolor, $fontsize, $fontcolor, $headertext, $headercolor, $headerfsize, $headerfcolor, $textalign, $active);
 		if($stmt->fetch()){
 			$this->id_diva = $divID;
+			$this->blocktype = $blocktype;
 			$this->bgcolor = $bgcolor;
 			$this->fontsize = $fontsize;
 			$this->fontcolor = $fontcolor;
@@ -116,6 +118,7 @@ class div
 		
 		while($data = $rs->fetch_array()){
 			$info[$i]['id_diva'] = $data['id_diva'];
+			$info[$i]['blocktype'] = $data['blocktype'];
 			$info[$i]['height'] = $data['height'];
 			$info[$i]['per_width'] = $data['per_width'];
 			$info[$i]['topm'] = $data['topm'];
@@ -137,7 +140,7 @@ class div
 
 	function getCSSProperties() {
 		//$stmt = $this->hDB->prepare("SELECT * FROM `divy` WHERE active=1");
-		$sql = "SELECT id_diva, height, per_width, topm, per_left, headercolor, headerfsize, headerfcolor, textalign, bgcolor, fontsize, fontcolor, FROM `divy` NATURAL JOIN `location` WHERE active=1";
+		$sql = "SELECT id_diva, blocktype, height, per_width, topm, per_left, headercolor, headerfsize, headerfcolor, textalign, bgcolor, fontsize, fontcolor, FROM `divy` NATURAL JOIN `location` WHERE active=1";
 		$info = array();
 		//$stmt->execute();
 		$rs = $this->hDB->query($sql);
@@ -146,6 +149,7 @@ class div
 		
 		while($data = $rs->fetch_array()){
 			$info[$i]['id_diva'] = $data['id_diva'];
+			$info[$i]['blocktype'] = $data['blocktype'];
 			$info[$i]['height'] = $data['height'];
 			$info[$i]['per_width'] = $data['per_width'];
 			$info[$i]['topm'] = $data['topm'];
@@ -180,12 +184,12 @@ class div
 		// (`id_diva`, `height`, `per_width`, `topm`, `per_leftm`) 
 		// VALUES (LAST_INSERT_ID(),30,20,20,20);
 		//$query = "START_TRANSACTION;";
-		$query = "INSERT INTO `divy` (`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`) VALUES (?,?,?,?,?,?,?);";
+		$query = "INSERT INTO `divy` (`blocktype`, `header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`) VALUES (?,?,?,?,?,?,?,?);";
 		//$query .= "INSERT INTO `location`(`id_diva`, `height`, `per_width`, `topm`, `per_leftm`) VALUES (LAST_INSERT_ID(),'?','?','?','?');";
 		//$query .= "COMMIT;";
 		
 		if($stmt = $this->hDB->prepare($query)) { // assuming $mysqli is the connection
-			$stmt->bind_param("sssisis", $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor);
+			$stmt->bind_param("ssssisis", $this->blocktype, $this->headertext, $this->headercolor, $this->headerfcolor, $this->headerfsize, $this->bgcolor, $this->fontsize, $this->fontcolor);
 			$stmt->execute();
 			// any additional code you need would go here.
 		} else {
@@ -260,6 +264,10 @@ class div
 	function getIdDiv() {
 		return $this->id_diva;
 	}
+
+	function getBlockType() {
+		return $this->blocktype;
+	}
 	
 	function getHeight() {
 		return $this->height;
@@ -317,6 +325,10 @@ class div
 	
 	function setIdDiv($DivID) {
 		$this->id_diva = $DivID;
+	}
+
+	function setBlocktype($blocktype) {
+		$this->blocktype = $blocktype;
 	}
 	
 	function setHeight($height) {

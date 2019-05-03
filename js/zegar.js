@@ -141,9 +141,21 @@
 		rgodzina="0"+rgodzina;	
 	
 	//document.getElementById("sdiv12").innerHTML=Ajax;
-	document.getElementById("sdiv12").innerHTML=rgodzina+":"+rminuta+":"+rsekunda;
-	document.getElementById("sdiv3").innerHTML= dzien+"."+miesiac+"."+rok+"</br>"+dzienTygodnia;
-	document.getElementById("sdiv4").innerHTML= godzina+":"+minuta+":"+sekunda;
+	var countElements = document.getElementsByClassName("countblock");
+	[].forEach.call(countElements, function(element) {
+		element.innerHTML=rgodzina+":"+rminuta+":"+rsekunda;
+	});
+	//[].forEach.call(els, function (el) {...});
+	var dateElements = document.getElementsByClassName("dateblock");
+	[].forEach.call(dateElements, function(element) {
+		element.innerHTML=dzien+"."+miesiac+"."+rok+"</br>"+dzienTygodnia;
+	});
+	
+	var clockElements = document.getElementsByClassName("clockblock");
+	[].forEach.call(clockElements, function(element) {
+		element.innerHTML=godzina+":"+minuta+":"+sekunda;
+	});
+	//document.getElementsByClassName("clockblock")[0].innerHTML= godzina+":"+minuta+":"+sekunda;
 	
 	setTimeout("odliczanie()",1000);
 }

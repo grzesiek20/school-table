@@ -49,8 +49,8 @@ else {
 	}
 
 	// function getCaptcha($secretKey) {
-	// 	$recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
-	// 	$recaptcha_secret = "6Ld8gJ8UAAAAAIZ3WxXdtzW1Atx58lnsrxyNDa0i";
+	// 	$recaptcha_url = "";
+	// 	$recaptcha_secret = "";
 	// 	$recaptcha_response = $_POST['recaptcha_response'];
 	// 	$recaptcha = file_get_contents($recaptcha_url."?secret=".$recaptcha_secret."&response={$secretKey}");
 	// 	$return = json_decode($recaptcha);

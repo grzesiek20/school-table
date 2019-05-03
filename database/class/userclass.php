@@ -96,14 +96,30 @@ $result = $stmt->get_result();
 		if($result && $result->num_rows == 1)
 		{
 		$data = $result->fetch_array();
+		//$salt = "1234";
+			$salt = substr(md5(rand()), 0, 7);
 			$_SESSION['id_user']= $data['id_user'];
 			$_SESSION['name'] = $data['name'];
 			$_SESSION['surname'] = $data['surname'];
-			$_SESSION['zalogowany'] = true;
-			unset($_SESSION['blad']);
-			unset($_SESSION['wronglogins']);
-			header('Location: ../index.php');
+			$_SESSION['zalogowany'] = md5($this->login.$salt);
+			setcookie('user', md5($this->login.$salt),time() + (86400 * 30),'/');
+			//setcookie('password',$password,time()+60*60*24*365, '/');
+			if($_SESSION['zalogowany'] != $_COOKIE['user']) {
+				$_SESSION['blad'] = '<span style="color:red">Błąd uwierzytelniania! Zaloguj się ponownie!</span>';
+				if(isset($_COOKIE['user'])){
+					setcookie('user','',time()-3600);
+				}
+				$_SESSION['wronglogins'] +=1;
+				header('Location: ../view/login.php');
+				exit();
+			} else {
+			 unset($_SESSION['blad']);
+			 unset($_SESSION['wronglogins']);
+			 header('Location: ../index.php');
+			//$_SESSION['blad'] = '<span style="color:red">'.$_SESSION['zalogowany'].'\n'.$_COOKIE['user'].'</span>';
+			//header('Location: ../view/login.php');
 			exit;
+			}
 		}
 		else {
 			$_SESSION['wronglogins'] +=1;

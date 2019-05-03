@@ -158,19 +158,16 @@
 									<div class="row">
 										<div class="col-md-2 pull-right">
 											<?php
-											if($_GET['id']!=2&&
-													$_GET['id']!=3&&
-													$_GET['id']!=4&&
-													$_GET['id']!=5&& // jeśli inne, niż wszystkie z wyświetlanym JavaScriptem, to możliwośc dodawania treści
-													$_GET['id']!=8&&
-													$_GET['id']!=10)
-												echo '<div class="pull-right ico"><a href="addcontent.php?id='.$_GET['id'].'"><i class="icon-plus-2 icons"></i></a></div>';
+											if($div->getBlockType()=='singleblock' ||
+												$div->getBlockType()=='multipleleblock')
+												// jeśli inne, niż wszystkie z wyświetlanym JavaScriptem, to możliwośc dodawania treści
+													echo '<div class="pull-right ico"><a href="addcontent.php?id='.$_GET['id'].'"><i class="icon-plus-2 icons"></i></a></div>';
 											?>
 										</div>
 									</div>
 										<?php 
 								//============ blok z losowaniem==================
-											if($_GET['id']==8)
+											if($div->getBlockType()=='drawblock')
 											{
 												$random = $randomize->getNumberScope();
 										echo '<div class="row">';

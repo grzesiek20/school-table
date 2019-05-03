@@ -21,6 +21,7 @@ if(isset($_POST['back'])){
 	if(isset($_POST['submit'])){
 			//$header = htmlentities($_POST['header'], ENT_QUOTES, "UTF-8");
 		$div->setIdDiv($_POST['id_diva']);
+		//$div->setBlockType()
 		$div->setHeader($_POST['header']);
 		$_SESSION['header'] = $_POST['header'];
 

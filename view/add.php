@@ -3,8 +3,6 @@
 	require_once __DIR__."/../database/panel/divadd.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
 
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -127,6 +125,20 @@
 										<input type="hidden" value="10" class="form-control" placeholder="per_width" id="per_width" name="per_width">
 										
 									</div>
+								</div>
+								<div class="row section form-group label-floating">
+									<label for="blocktype" class="control-label">Typ bloku:</label>
+									<select class="form-control" id="blocktype" name="blocktype">
+										<option value="singleblock">Pojedynczy wpis</option>
+										<option value="multipleblock">Slajder wpisów</option>
+										<option value="sliderblock">Slajder zdjęć</option>
+										<option value="dateblock">Wyświetlenie daty</option>
+										<option value="planblock">Aktualnie trwające zajęcia</option>
+										<option value="clockblock">Zegar</option>
+										<option value="headblock">Blok nagłówkowy</option>
+										<option value="countblock">Odliczanie do dzwonka</option>
+										<option value="drawblock">Blok losowania numerka</option>
+									</select>
 								</div>
 							</div>
                         <div class="pull-right">

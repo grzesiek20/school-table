@@ -5,7 +5,7 @@ $options['input_name']             = 'captcha_input'; // change name of input el
 $options['disable_flash_fallback'] = false; // allow flash fallback
 	session_start();
 	
-	 if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	 if((isset($_SESSION['zalogowany'])) && isset($_COOKIE['user']) && $_SESSION['zalogowany']==$_COOKIE['user'])
 	{
 		header('Location: ../index.php');
 		exit();
