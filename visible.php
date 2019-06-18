@@ -2,12 +2,12 @@
 
 	require_once "database/class/sdivclass.php";
 	
-	$sdiv = new sdiv();
+	$message = new message();
 		
-			 $sdiv->getSdiv($_GET['id_sdiv']);
-			 $sdiv->setVisibility($_GET['id_sdiv'],$_GET['set']);
+			 $message->getSdiv($_GET['id_message']);
+			 $message->setVisibility($_GET['id_message'],$_GET['set']);
 			
-					 header("Location: view/edit.php?id=".$sdiv->getIdDiv());
+					 header("Location: view/edit.php?id=".$message->getIdDiv());
 					 exit;	
 
 		

@@ -51,9 +51,9 @@
 								
 								
 								<?php
-								$sdiv= new sdiv();
-								$sdiv->getSdiv($_GET['sdiv']);
-								$div = $sdiv->getIdDiv();
+								$message= new message();
+								$message->getSdiv($_GET['sdiv']);
+								$panel = $message->getIdDiv();
 								$i=1;
 
 									echo '<div class="col-md-12">';
@@ -64,36 +64,36 @@
 											echo $_SESSION['content'];
 											unset($_SESSION['content']);
 										} else {
-											echo $sdiv->getContent();
+											echo $message->getContent();
 										}
 										echo '</textarea>';
-									if($div==11 || $div==9) // jeśli slider z komunikatami, to dodaj daty do wyświetlania
+									if($panel==11 || $panel==9) // jeśli slider z komunikatami, to dodaj daty do wyświetlania
 									{
 										echo '<div class="row">';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
-													echo '<label for="begdate" class="control-label">Data początkowa</label>';
+													echo '<label for="begin_date" class="control-label">Data początkowa</label>';
 													echo '<input readonly="readonly" value="';
-													if(isset($_SESSION['begdate'])){
-														echo $_SESSION['begdate'];
-														unset($_SESSION['begdate']);
+													if(isset($_SESSION['begin_date'])){
+														echo $_SESSION['begin_date'];
+														unset($_SESSION['begin_date']);
 													} else {
-														echo $sdiv->getBegdate();
+														echo $message->getBegdate();
 													}
-													echo '" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
+													echo '" class="form-control" placeholder="begin_date" id="begin_date" name="begin_date">';
 												echo '</div>';
 											echo '</div>';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
-													echo '<label for="enddate" class="control-label">Data końcowa</label>';
+													echo '<label for="end_date" class="control-label">Data końcowa</label>';
 													echo '<input readonly="readonly" value="';
-													if(isset($_SESSION['enddate'])){
-														echo $_SESSION['enddate'];
-														unset($_SESSION['enddate']);
+													if(isset($_SESSION['end_date'])){
+														echo $_SESSION['end_date'];
+														unset($_SESSION['end_date']);
 													} else {
-														echo $sdiv->getEnddate();
+														echo $message->getEnddate();
 													}
-													echo '" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
+													echo '" class="form-control" placeholder="end_date" id="end_date" name="end_date">';
 												echo '</div>';
 											echo '</div>';
 									echo '</div>';
@@ -101,15 +101,15 @@
 									$i++;
 								
 								?>
-								<input type="hidden" value="<?php echo $sdiv->getIdSdiv(); ?>" class="form-control" placeholder="Treść" id="id_sdiv" name="id_sdiv">
-								<input type="hidden" value="<?php echo $sdiv->getIdDiv(); ?>" class="form-control" placeholder="id" id="id_div" name="id_div">
+								<input type="hidden" value="<?php echo $message->getIdSdiv(); ?>" class="form-control" placeholder="Treść" id="id_message" name="id_message">
+								<input type="hidden" value="<?php echo $message->getIdDiv(); ?>" class="form-control" placeholder="id" id="id_div" name="id_div">
 							</div>
                         <div class="pull-right">
 							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
                             <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-custom">
                         </div>
 						<?php
-						if($div==11 || $div==9){
+						if($panel==11 || $panel==9){
 						echo '<div class="pull-left">';
 							echo '<button type="button" onclick="resetnews()" id="newsreset" name="newsreset"  class="btn btn-custom">Resetuj daty</button>';
                         echo '</div>';

@@ -79,42 +79,42 @@ body
 	background-position:center;
 }
 <?php
-	for ($i=0; $i<count($divs);$i++){
+	for ($i=0; $i<count($panels);$i++){
 		if($i==0){
-			echo "#div".$divs[$i]['id_diva']."{\n";
-			echo "height:".$divs[$i]['height']."px;\n";
-			echo "width:".$divs[$i]['per_width']."%;\n";
-			echo "top:".$divs[$i]['topm']."px;\n";
-			echo "left:".$divs[$i]['per_leftm']."%;\n";
-			echo "background-color:".$divs[$i]['bgcolor'].";\n";
-			echo "color:".$divs[$i]['fontcolor'].";\n";
-			echo "text-align:".$divs[$i]['textalign'].";\n";
+			echo "#div".$panels[$i]['id_panel']."{\n";
+			echo "height:".$panels[$i]['height']."px;\n";
+			echo "width:".$panels[$i]['percent_width']."%;\n";
+			echo "top:".$panels[$i]['top_margin']."px;\n";
+			echo "left:".$panels[$i]['percent_left_margin']."%;\n";
+			echo "background-color:".$panels[$i]['background_color'].";\n";
+			echo "color:".$panels[$i]['font_color'].";\n";
+			echo "text-align:".$panels[$i]['text_align'].";\n";
 			echo "z-index:1;\n";
 			echo "}\n\n";
-			echo ".cust".$divs[$i]['id_diva']."{\n";
-			echo "font-size:".$divs[$i]['fontsize']."px;\n";
+			echo ".cust".$panels[$i]['id_panel']."{\n";
+			echo "font-size:".$panels[$i]['font_size']."px;\n";
 			echo "}\n";
 		}
 		else
 		{
-			echo "#div".$divs[$i]['id_diva']."{\n";
-			echo "height:".$divs[$i]['height']."px;\n";
-			echo "width:".$divs[$i]['per_width']."%;\n";
-			echo "top:".$divs[$i]['topm']."px;\n";
-			echo "left:".$divs[$i]['per_leftm']."%;\n";
-			echo "background-color:".$divs[$i]['bgcolor'].";\n";
-			echo "color:".$divs[$i]['fontcolor'].";\n";
-			echo "text-align:".$divs[$i]['textalign'].";\n";
+			echo "#div".$panels[$i]['id_panel']."{\n";
+			echo "height:".$panels[$i]['height']."px;\n";
+			echo "width:".$panels[$i]['percent_width']."%;\n";
+			echo "top:".$panels[$i]['top_margin']."px;\n";
+			echo "left:".$panels[$i]['percent_left_margin']."%;\n";
+			echo "background-color:".$panels[$i]['background_color'].";\n";
+			echo "color:".$panels[$i]['font_color'].";\n";
+			echo "text-align:".$panels[$i]['text_align'].";\n";
 			echo "}\n\n";
 			
-			echo ".head".$divs[$i]['id_diva']."{\n";
-			echo "background-color:".$divs[$i]['headercolor']." !important;\n";
-			echo "font-size:".$divs[$i]['headerfsize']."px;\n";
-			echo "color:".$divs[$i]['headerfcolor']." !important;\n";
+			echo ".head".$panels[$i]['id_panel']."{\n";
+			echo "background-color:".$panels[$i]['header_color']." !important;\n";
+			echo "font-size:".$panels[$i]['header_font_size']."px;\n";
+			echo "color:".$panels[$i]['header_font_color']." !important;\n";
 			echo "}\n\n";
 			
-			echo ".cust".$divs[$i]['id_diva']."{\n";
-			echo "font-size:".$divs[$i]['fontsize']."px;\n";
+			echo ".cust".$panels[$i]['id_panel']."{\n";
+			echo "font-size:".$panels[$i]['font_size']."px;\n";
 			echo "}\n";
 		}
 		
@@ -123,20 +123,20 @@ body
 
 @media (max-width: 992px) {
 <?php
-for ($i=0; $i<count($divs);$i++){
+for ($i=0; $i<count($panels);$i++){
 		if($i==0){
-			echo ".cust".$divs[$i]['id_diva']."{\n";
+			echo ".cust".$panels[$i]['id_panel']."{\n";
 			echo "font-size:40px;\n";
 			echo "padding-top:12px;\n";
 			echo "}\n";
 		}
 		else
 		{
-			echo ".head".$divs[$i]['id_diva']."{\n";
+			echo ".head".$panels[$i]['id_panel']."{\n";
 			echo "font-size:20px;\n";
 			echo "}\n\n";
 			
-			echo ".cust".$divs[$i]['id_diva']."{\n";
+			echo ".cust".$panels[$i]['id_panel']."{\n";
 			echo "font-size:20px;\n";
 			echo "}\n";
 		}

@@ -1,13 +1,13 @@
 <?php
 
-class sdiv
+class message
 {
-	private $id_sdiv;
-	private $id_diva;
+	private $id_message;
+	private $id_panel;
 	private $id_user;
 	private $content;
-	private $begdate;
-	private $enddate;
+	private $begin_date;
+	private $end_date;
 	private $visible;
 	private $active;
 	
@@ -37,240 +37,156 @@ class sdiv
 	$this->hDB->select_db($db_name);
 		
 	}
-	
-	// function getAllDESC($divID) {
-		
-		// $sql = "SELECT * FROM sdiv WHERE id_diva='".$divID."' AND active=1 ORDER BY id_sdiv DESC;";
-		// $info = array();
-		// $rs = $this->hDB->query($sql);
-		
-		// $i=0;
-		
-		// while($data = $rs->fetch_array()){
-			// $info[$i]['id_sdiv'] = $data['id_sdiv'];
-			// $info[$i]['id_diva'] = $data['id_diva'];
-			// $info[$i]['id_user'] = $data['id_user'];
-			// $info[$i]['content'] = $data['content'];
-			// $info[$i]['begdate'] = $data['begdate'];
-			// $info[$i]['enddate'] = $data['enddate'];
-			// $info[$i]['visible'] = $data['visible'];
-			// $info[$i]['active'] = $data['active'];
-			// $i++;
-		// }
-		
-		// return $info;
-	// }
-	
-		function getAllDESC($divID) {
-			$query = "SELECT * FROM `body` WHERE id_diva=? AND active=1 ORDER BY id_sdiv DESC;";
+		function getAllDESC($panelID) {
+			$query = "SELECT * FROM `message` WHERE id_panel=? AND active=1 ORDER BY id_message DESC;";
 
 			$stmt = $this->hDB->prepare($query);
 	
-			$stmt->bind_param("i", $divID);
+			$stmt->bind_param("i", $panelID);
 			
 			/* Execute the statement */
 			$stmt->execute();
 			$info = array();
-			$stmt->bind_result($id_sdiv, $id_diva, $id_user, $content, $begdate, $enddate, $visible, $active);
+			$stmt->bind_result($id_message, $id_panel, $id_user, $content, $begin_date, $end_date, $visible, $active);
 			$i=0;
 		
 			while($stmt->fetch()){
-				$info[$i]['id_sdiv'] = $id_sdiv;
-				$info[$i]['id_diva'] = $id_diva;
+				$info[$i]['id_message'] = $id_message;
+				$info[$i]['id_panel'] = $id_panel;
 				$info[$i]['id_user'] = $id_user;
 				$info[$i]['content'] = $content;
-				$info[$i]['begdate'] = $begdate;
-				$info[$i]['enddate'] = $enddate;
+				$info[$i]['begin_date'] = $begin_date;
+				$info[$i]['end_date'] = $end_date;
 				$info[$i]['visible'] = $visible;
 				$info[$i]['active'] = $active;
 				$i++;
 			}
 			$stmt->close();
-		// $sql = "SELECT * FROM `body` WHERE id_diva='".$divID."' AND active=1 ORDER BY id_sdiv DESC;";
-		// $info = array();
-		// $rs = $this->hDB->query($sql);
-		
-		// $i=0;
-		
-		// while($data = $rs->fetch_array()){
-		// 	$info[$i]['id_sdiv'] = $data['id_sdiv'];
-		// 	$info[$i]['id_diva'] = $data['id_diva'];
-		// 	$info[$i]['content'] = $data['content'];
-		// 	$info[$i]['begdate'] = $data['begdate'];
-		// 	$info[$i]['enddate'] = $data['enddate'];
-		// 	$info[$i]['visible'] = $data['visible'];
-		// 	$info[$i]['active'] = $data['active'];
-		// 	$i++;
-		// }
 		
 		return $info;
 	}
 	
-	function getAllVisibleDESC($divID) {
-		$query = "SELECT * FROM `body` WHERE id_diva=? AND active=1 AND visible=1 ORDER BY id_sdiv DESC;";
+	function getAllVisibleDESC($panelID) {
+		$query = "SELECT * FROM `message` WHERE id_panel=? AND active=1 AND visible=1 ORDER BY id_message DESC;";
 
 		$stmt = $this->hDB->prepare($query);
 
-		$stmt->bind_param("i", $divID);
+		$stmt->bind_param("i", $panelID);
 		
 		/* Execute the statement */
 		$stmt->execute();
 		$info = array();
-		$stmt->bind_result($id_sdiv, $id_diva, $id_user, $content, $begdate, $enddate, $visible, $active);
+		$stmt->bind_result($id_message, $id_panel, $id_user, $content, $begin_date, $end_date, $visible, $active);
 		$i=0;
 	
 		while($stmt->fetch()){
-			$info[$i]['id_sdiv'] = $id_sdiv;
-			$info[$i]['id_diva'] = $id_diva;
+			$info[$i]['id_message'] = $id_message;
+			$info[$i]['id_panel'] = $id_panel;
 			$info[$i]['id_user'] = $id_user;
 			$info[$i]['content'] = $content;
-			$info[$i]['begdate'] = $begdate;
-			$info[$i]['enddate'] = $enddate;
+			$info[$i]['begin_date'] = $begin_date;
+			$info[$i]['end_date'] = $end_date;
 			$info[$i]['visible'] = $visible;
 			$info[$i]['active'] = $active;
 			$i++;
 		}
 		$stmt->close();
-		// $sql = "SELECT * FROM `body` WHERE id_diva='".$divID."' AND active=1 AND visible=1 ORDER BY id_sdiv DESC;";
-		// $info = array();
-		// $rs = $this->hDB->query($sql);
-		
-		// $i=0;
-		
-		// while($data = $rs->fetch_array()){
-		// 	$info[$i]['id_sdiv'] = $data['id_sdiv'];
-		// 	$info[$i]['id_diva'] = $data['id_diva'];
-		// 	$info[$i]['content'] = $data['content'];
-		// 	$info[$i]['begdate'] = $data['begdate'];
-		// 	$info[$i]['enddate'] = $data['enddate'];
-		// 	$info[$i]['visible'] = $data['visible'];
-		// 	$info[$i]['active'] = $data['active'];
-		// 	$i++;
-		// }
 		
 		return $info;
 	}
 	
-	function getSdiv($sdivID) {
-		$query = "SELECT * FROM `body` WHERE id_sdiv=?;";
+	function getSdiv($messageID) {
+		$query = "SELECT * FROM `message` WHERE id_message=?;";
 
 		$stmt = $this->hDB->prepare($query);
 
-		$stmt->bind_param("i", $sdivID);
+		$stmt->bind_param("i", $messageID);
 
 		/* Execute the statement */
 		$stmt->execute();
 
-		$stmt->bind_result($id_sdiv, $id_diva, $id_user, $content, $begdate, $enddate, $visible, $active);
+		$stmt->bind_result($id_message, $id_panel, $id_user, $content, $begin_date, $end_date, $visible, $active);
 		if($stmt->fetch()){
-			$this->id_sdiv = $id_sdiv;
-			$this->id_diva = $id_diva;
+			$this->id_message = $id_message;
+			$this->id_panel = $id_panel;
 			$this->id_user = $id_user;
 			$this->content = $content;
-			$this->begdate = $begdate;
-			$this->enddate = $enddate;
+			$this->begin_date = $begin_date;
+			$this->end_date = $end_date;
 			$this->visible = $visible;
 			$this->active = $active;
 		}
 		$stmt->close();
 
-
-		// $sql = "SELECT * FROM `body` WHERE id_sdiv='".$sdivID."';";
-		// $rs = $this->hDB->query($sql);
-
-		
-		// $data = $rs->fetch_array();
-		// 	$this->id_sdiv = $data['id_sdiv'];
-		// 	$this->id_diva = $data['id_diva'];
-		// 	$this->content = $data['content'];
-		// 	$this->begdate = $data['begdate'];
-		// 	$this->enddate = $data['enddate'];
-		// 	$this->visible = $data['visible'];
-		// 	$this->active = $data['active'];
 	}
 	
 	function updateSdiv(){
-		$query = "UPDATE `body` SET content = ?, begdate = ?, enddate = ?, visible = ? WHERE id_sdiv = ?;";
+		$query = "UPDATE `message` SET content = ?, begin_date = ?, end_date = ?, visible = ? WHERE id_message = ?;";
 		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("sssii", $this->content, $this->begdate, $this->enddate, $this->visible, $this->id_sdiv);
+		$stmt->bind_param("sssii", $this->content, $this->begin_date, $this->end_date, $this->visible, $this->id_message);
 		$stmt->execute();
 		$stmt->close();
-		// $sql = "UPDATE `body` SET content = '". $this->hDB->escape_string($this->content)."', ";
-		// $sql .= "begdate = '" . $this->begdate . "', ";
-		// $sql .= "enddate = '" . $this->enddate . "', ";
-		// $sql .= "visible = '" . $this->visible . "' ";
-		// $sql .= "WHERE id_sdiv = '" . $this->id_sdiv ."'; ";
-		
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
+
 	}
 	
 	function insertSdiv(){
-		$query = "INSERT INTO `body` (`id_diva`, `id_user`, `content`, `begdate`, `enddate`) VALUES ";
+		$query = "INSERT INTO `message` (`id_panel`, `id_user`, `content`, `begin_date`, `end_date`) VALUES ";
 		$query .= "(?, 1, ?, ?, ?);";
 		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("isss", $this->id_diva, $this->content, $this->begdate, $this->enddate);
-		$stmt->execute();
-		$stmt->close();
-		// $sql = "INSERT INTO `body` (`id_diva`,`id_user`, `content`, `begdate`, `enddate`) VALUES ";
-		// $sql .= "('" . $this->id_diva . "', 1, '" . $this->content . "', '" . $this->begdate. "',";
-		// $sql .= "enddate = '" . $this->enddate . "');";
-		
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
+		$stmt->bind_param("isss", $this->id_panel, $this->content, $this->begin_date, $this->end_date);
+		if($stmt->execute()) {
+			Logger::wh_log(__METHOD__,"Success","Komunikat dodany poprawnie!\n".$this->writeData());
+		} else {
+			Logger::wh_log(__METHOD__,"Error","Komunikat nie został dodany!\n".$this->writeData());
+		}
 
+		$stmt->close();
 	}
 	
-	function deleteSdiv($sdivID){
-		$query = "UPDATE `body` SET `active` = 0 WHERE id_sdiv=?;";
+	function deleteSdiv($messageID){
+		$query = "UPDATE `message` SET `active` = 0 WHERE id_message=?;";
 		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("i", $sdivID);
+		$stmt->bind_param("i", $messageID);
+		if($stmt->execute()) {
+			Logger::wh_log(__METHOD__,"Success","Komunikat usunięty!\n ID: ".$messageID);
+		} else {
+			Logger::wh_log(__METHOD__,"Error","Komunikat nie został usunięty!\n ID: ".$messageID);
+		}
+		$stmt->close();
+	}
+	
+	function setVisibility($messageID,$set){
+		$query = "UPDATE `message` SET `visible` =? where id_message=?;";
+		$stmt = $this->hDB->prepare($query);
+		$stmt->bind_param("ii", $set, $messageID);
 		$stmt->execute();
 		$stmt->close();
-		// $sql = "UPDATE `body` SET `active` = 0 WHERE id_sdiv='".$sdivID."';";
-		
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
 	}
 	
-	function setVisibility($sdivID,$set){
-		$query = "UPDATE `body` SET `visible` =? where id_sdiv=?;";
-		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("ii", $set, $sdivID);
-		$stmt->execute();
-		$stmt->close();
-		// $sql = "UPDATE `body` SET `visible` ='".$set."' where id_sdiv='".$sdivID."';";
-		
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
-	}
-	
-	function getPlan($gkoniec){
-		$query = "SELECT nazwa, gkoniec FROM `plan` WHERE gpoczatek<=? AND gkoniec>?;";
+	function getPlan($end_hour){
+		$query = "SELECT `description`, end_hour FROM `plan` WHERE begin_hour<=? AND end_hour>?;";
 
 		$stmt = $this->hDB->prepare($query);
-		$stmt->bind_param("ss", $gkoniec, $gkoniec);
+		$stmt->bind_param("ss", $end_hour, $end_hour);
 
 		/* Execute the statement */
 		$stmt->execute();
 
-		$stmt->bind_result($nazwa, $gkoniec);
+		$stmt->bind_result($nazwa, $end_hour);
 		if($stmt->fetch()){
-			return $nazwa."-".$gkoniec;
+			return $nazwa."-".$end_hour;
 		}
 		$stmt->close();
-		// $sql = "SELECT nazwa, gkoniec FROM `plan` WHERE gpoczatek<='".$gkoniec."' AND gkoniec>'".$gkoniec."';";
-		// $rs = $this->hDB->query($sql) or die ($this->hDB->error());
-
-		// $data=$rs->fetch_array();
-		
-		//return $data['nazwa']."-".$data['gkoniec'];
 	}
 	
 	function getPosts(){
-		$sql= "UPDATE `body` SET `visible` = 0 WHERE enddate<CURRENT_DATE() AND enddate<>'0000-00-00'";
+		$sql= "UPDATE `message` SET `visible` = 0 WHERE end_date<CURRENT_DATE() AND end_date<>'0000-00-00'";
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
-		$sql = "SELECT id_diva FROM `divy` WHERE `blocktype` = 'multipleblock';";
+		$sql = "SELECT id_panel FROM `panel` WHERE `block_type` = 'multipleblock';";
 		$data = $this->hDB->query($sql);
 			if ($data->num_rows==1) {
 				$result=$data->fetch_array();
-				$sql = "SELECT * FROM `body` WHERE id_diva=".$result['id_diva']." AND active=1 AND visible=1 AND ((begdate<=CURRENT_DATE() AND enddate>=CURRENT_DATE()) OR (begdate='0000-00-00' AND enddate='0000-00-00')) ORDER BY id_sdiv DESC;";
+				$sql = "SELECT * FROM `message` WHERE id_panel=".$result['id_panel']." AND active=1 AND visible=1 AND ((begin_date<=CURRENT_DATE() AND end_date>=CURRENT_DATE()) OR (begin_date='0000-00-00' AND end_date='0000-00-00')) ORDER BY id_message DESC;";
 		
 				if($data = $this->hDB->query($sql))
 					$ile_wierszy = $data->num_rows;
@@ -287,11 +203,11 @@ class sdiv
 	
 	
 	function getIdSdiv() {
-		return $this->id_sdiv;
+		return $this->id_message;
 	}
 	
 	function getIdDiv() {
-		return $this->id_diva;
+		return $this->id_panel;
 	}
 
 	function getIdUser() {
@@ -303,11 +219,11 @@ class sdiv
 	}
 	
 	function getBegdate() {
-		return $this->begdate;
+		return $this->begin_date;
 	}
 	
 	function getEnddate() {
-		return $this->enddate;
+		return $this->end_date;
 	}
 	
 	function getVisible() {
@@ -322,12 +238,12 @@ class sdiv
 	
 	//set
 	
-	function setIdSdiv($sdivID) {
-		$this->id_sdiv = $sdivID;;
+	function setIdSdiv($messageID) {
+		$this->id_message = $messageID;;
 	}
 	
-	function setIdDiv($divID) {
-		$this->id_diva = $divID;
+	function setIdDiv($panelID) {
+		$this->id_panel = $panelID;
 	}
 
 	function setIdUser($idUser) {
@@ -338,12 +254,12 @@ class sdiv
 		$this->content = $content;
 	}
 	
-	function setBegdate($begdate) {
-		$this->begdate = $begdate;
+	function setBegdate($begin_date) {
+		$this->begin_date = $begin_date;
 	}
 	
-	function setEnddate($enddate) {
-		$this->enddate = $enddate;
+	function setEnddate($end_date) {
+		$this->end_date = $end_date;
 	}
 	
 	function setVisible($visible) {
@@ -354,28 +270,33 @@ class sdiv
 		$this->active = $active;
 	}
 	
+	function writeData() {
+		$object = "Obiekt: Komunikat\nid_panel: ".$this->id_panel."\nid_user: ".$this->id_user."\nTreść: ".$this->content."\n";
+		$object .= "Data początkowa: ".$this->begin_date."\nData końcowa: ".$this->end_date;
+		return $object;
+	}
 //---------------------------------wyszukiwanie---------------------------------------------
 function searchSdivs(){
 	if($this->visible==2 )
 	{
-		$sql = "SELECT content, begdate, enddate FROM `sdiv` WHERE content LIKE ('%".$this->content."%') AND active='".$this->active."' AND id_diva=11;";
+		$sql = "SELECT content, begin_date, end_date FROM `message` WHERE content LIKE ('%".$this->content."%') AND active='".$this->active."' AND id_panel=11;";
 	}
-	elseif($this->visible==2 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->visible==2 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT content ,begdate, enddate FROM `sdiv` WHERE content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."' AND active='".$this->active."' AND id_diva=11;";
+		$sql = "SELECT content ,begin_date, end_date FROM `message` WHERE content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."' AND active='".$this->active."' AND id_panel=11;";
 	}
 	
-	elseif($this->visible==1 && $this->begdate=='' && $this->enddate=='')
+	elseif($this->visible==1 && $this->begin_date=='' && $this->end_date=='')
 	{
-		$sql = "SELECT content ,begdate, enddate FROM `sdiv` WHERE content LIKE ('%".$this->content."%') AND active='".$this->active."' AND visible='".$this->visible."' AND id_diva=11;";
+		$sql = "SELECT content ,begin_date, end_date FROM `message` WHERE content LIKE ('%".$this->content."%') AND active='".$this->active."' AND visible='".$this->visible."' AND id_panel=11;";
 	}
-	elseif($this->visible==1 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->visible==1 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT content ,begdate, enddate FROM `sdiv` WHERE content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."' AND  active='".$this->active."' AND visible='".$this->visible."' AND id_diva=11;";
+		$sql = "SELECT content ,begin_date, end_date FROM `message` WHERE content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."' AND  active='".$this->active."' AND visible='".$this->visible."' AND id_panel=11;";
 	}
 	
 	else{
-		$sql = "SELECT content ,begdate, enddate FROM `sdiv` WHERE content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."' AND active='".$this->active."' AND visible='".$this->visible."' AND id_diva=11;";
+		$sql = "SELECT content ,begin_date, end_date FROM `message` WHERE content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."' AND active='".$this->active."' AND visible='".$this->visible."' AND id_panel=11;";
 	}
 		
 		$rs = $this->hDB->query($sql);
@@ -385,8 +306,8 @@ function searchSdivs(){
 			$i=0;
 		while($data = $rs->fetch_array()){
 			$info[$i]['content'] = $data['content'];
-			$info[$i]['begdate'] = $data['begdate'];
-			$info[$i]['enddate'] = $data['enddate'];
+			$info[$i]['begin_date'] = $data['begin_date'];
+			$info[$i]['end_date'] = $data['end_date'];
 			
 			$i++;
 		}

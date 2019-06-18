@@ -77,6 +77,12 @@
       "css": "user-plus",
       "code": 62004,
       "src": "fontawesome"
+    },
+    {
+      "uid": "8b80d36d4ef43889db10bc1f0dc9a862",
+      "css": "user",
+      "code": 59402,
+      "src": "fontawesome"
     }
   ]
 }

@@ -108,12 +108,12 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4">
-							<label for="begdate" class="control-label">Data rozpoczęcia wyświetlania</label>
-							<input type="date" class="form-control" name="begdate">
+							<label for="begin_date" class="control-label">Data rozpoczęcia wyświetlania</label>
+							<input type="date" class="form-control" name="begin_date">
 						</div>
 						<div class="col-md-4">
-							<label for="enddate" class="control-label">Data zakończenia wyświetlania</label>
-							<input type="date" class="form-control" name="enddate">
+							<label for="end_date" class="control-label">Data zakończenia wyświetlania</label>
+							<input type="date" class="form-control" name="end_date">
 						</div>
 					</div>
 					<div class="row">
@@ -162,13 +162,13 @@
 					<div class="row">
 						<div class="col-md-7">
 								<div class="col-md-6">
-									<label for="begdate" class="control-label">Wylosowane w okresie</label>
-									<input type="date" class="form-control" name="begdate">
+									<label for="begin_date" class="control-label">Wylosowane w okresie</label>
+									<input type="date" class="form-control" name="begin_date">
 									<span class="separator"> </span>
 								</div>
 								<div class="col-md-6">
-								<label for="begdate" class="control-label">&ensp;</label>
-									<input type="date" class="form-control" name="enddate">
+								<label for="begin_date" class="control-label">&ensp;</label>
+									<input type="date" class="form-control" name="end_date">
 									<span class="separator"> </span>
 								</div>
 						</div>

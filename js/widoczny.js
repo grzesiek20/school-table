@@ -6,7 +6,7 @@ function visibleAjax(){
 				  async: false,
 				  url: "./database/visible.php", 	  //plany na wykorzystanie do ustawiania widoczności   
 				  type: "GET",
-				  data: {id_sdiv:id_sdiv},
+				  data: {id_message:id_message},
 												  
 				  success: function(data)
 				  {

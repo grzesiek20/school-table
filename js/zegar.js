@@ -13,7 +13,7 @@
 				  url: "./database/confplanajax.php", 	  //the script to call to get data          
 				  type: "POST",
 				  data: {
-                    gkoniec:timesend
+                    end_hour:timesend
                 }, 
 												  
 				  success: function(data)
@@ -36,14 +36,14 @@
 				  url: "./database/planajax.php",     
 				  type: "POST",
 				  data: {
-                    gkoniec:gkoniec
+						end_hour:gkoniec
                 }, 
 												  
 				  success: function(data)
 				  {
 					  lekcja = data.split('-');
 						Ajax = lekcja[1];
-						//var gkoniec = Ajax.toString();
+						//var end_hour = Ajax.toString();
 					$('#sdiv11').html(lekcja[0]);	
 
 				  } 
@@ -82,7 +82,7 @@
 	var roznica = new Date();
 	roznica = koncowa - aktualna;
 	
-	if(parseInt(roznica/1000)==0) // zawsze, kiedy dzwonek i o północy
+	if(parseInt(roznica/1000)<=0) // zawsze, kiedy dzwonek i o północy
 	{
 		var audio = new Audio('dzwonek.mp3');
 		audio.play();

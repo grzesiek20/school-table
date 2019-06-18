@@ -46,44 +46,44 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group label-floating">
-										<label for="headercolor" class="control-label">Kolor nagłówka</label>
+										<label for="header_color" class="control-label">Kolor nagłówka</label>
 										<input type="color" value="<?php
-									if(isset($_SESSION['headercolor'])) {
-										echo $_SESSION['headercolor'];
-										unset ($_SESSION['headercolor']);
+									if(isset($_SESSION['header_color'])) {
+										echo $_SESSION['header_color'];
+										unset ($_SESSION['header_color']);
 									} else {
 										echo "#009c8a";
-									} ?>" class="form-control" placeholder="Kolor nagłówka" id="headercolor" name="headercolor">
+									} ?>" class="form-control" placeholder="Kolor nagłówka" id="header_color" name="header_color">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group label-floating">
-										<label for="headerfcolor" class="control-label">Kolor czcionki</label>
+										<label for="header_font_color" class="control-label">Kolor czcionki</label>
 										<input type="color" value="<?php
-									if(isset($_SESSION['headerfcolor'])) {
-										echo $_SESSION['headerfcolor'];
-										unset ($_SESSION['headerfcolor']);
+									if(isset($_SESSION['header_font_color'])) {
+										echo $_SESSION['header_font_color'];
+										unset ($_SESSION['header_font_color']);
 									} else {
 										echo "#ffffff";
-									} ?>" class="form-control" placeholder="Kolor czcionki" id="headerfcolor" name="headerfcolor">
+									} ?>" class="form-control" placeholder="Kolor czcionki" id="header_font_color" name="header_font_color">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group label-floating">
-										<label for="headerfsize" class="control-label">Rozmiar czcionki</label>
+										<label for="header_font_size" class="control-label">Rozmiar czcionki</label>
 										<input type="number" value="<?php
-									if(isset($_SESSION['headerfsize'])) {
-										echo $_SESSION['headerfsize'];
-										unset ($_SESSION['headerfsize']);
+									if(isset($_SESSION['header_font_size'])) {
+										echo $_SESSION['header_font_size'];
+										unset ($_SESSION['header_font_size']);
 									} else {
 										echo "20";
-									} ?>" class="form-control" placeholder="Rozmiar czcionki" id="headerfsize" name="headerfsize">
+									} ?>" class="form-control" placeholder="Rozmiar czcionki" id="header_font_size" name="header_font_size">
 									</div>
 								</div>
 							</div>
 								<div class="form-group label-floating">
-									<label for="header" class="control-label">Nagłówek</label>
-									<input type="text" value="" class="form-control" placeholder="Nagłówek" id="header" name="header">	
+									<label for="header_text" class="control-label">Nagłówek</label>
+									<input type="text" value="" class="form-control" placeholder="Nagłówek" id="header_text" name="header_text">	
 								</div>
 							</div>
 						
@@ -92,43 +92,43 @@
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group label-floating">
-											<label for="bgcolor" class="control-label">Kolor bloku</label>
+											<label for="background_color" class="control-label">Kolor bloku</label>
 											<input type="color" value="<?php
-									if(isset($_SESSION['bgcolor'])) {
-										echo $_SESSION['bgcolor'];
-										unset ($_SESSION['bgcolor']);
+									if(isset($_SESSION['background_color'])) {
+										echo $_SESSION['background_color'];
+										unset ($_SESSION['background_color']);
 									} else {
 										echo "#ffffff";
-									} ?>" class="form-control" placeholder="Kolor bloku" id="bgcolor" name="bgcolor">
+									} ?>" class="form-control" placeholder="Kolor bloku" id="background_color" name="background_color">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group label-floating">
-											<label for="fontcolor" class="control-label">Kolor czcionki</label>
-											<input type="color" value="#000000" class="form-control" placeholder="Kolor czcionki" id="fontcolor" name="fontcolor">
+											<label for="font_color" class="control-label">Kolor czcionki</label>
+											<input type="color" value="#000000" class="form-control" placeholder="Kolor czcionki" id="font_color" name="font_color">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group label-floating">
-											<label for="fontsize" class="control-label">Rozmiar czcionki</label>
+											<label for="font_size" class="control-label">Rozmiar czcionki</label>
 											<input type="number" value="<?php
-									if(isset($_SESSION['fontsize'])) {
-										echo $_SESSION['fontsize'];
-										unset ($_SESSION['fontsize']);
+									if(isset($_SESSION['font_size'])) {
+										echo $_SESSION['font_size'];
+										unset ($_SESSION['font_size']);
 									} else {
 										echo "20";
-									} ?>" class="form-control" placeholder="Rozmiar czcionki" id="fontsize" name="fontsize">
+									} ?>" class="form-control" placeholder="Rozmiar czcionki" id="font_size" name="font_size">
 										</div>
 										
-										<input type="hidden" value="90" class="form-control" placeholder="topm" id="topm" name="topm">
+										<input type="hidden" value="90" class="form-control" placeholder="top_margin" id="top_margin" name="top_margin">
 										<input type="hidden" value="90" class="form-control" placeholder="height" id="height" name="height">
-										<input type="hidden" value="10" class="form-control" placeholder="per_width" id="per_width" name="per_width">
+										<input type="hidden" value="10" class="form-control" placeholder="percent_width" id="percent_width" name="percent_width">
 										
 									</div>
 								</div>
 								<div class="row section form-group label-floating">
-									<label for="blocktype" class="control-label">Typ bloku:</label>
-									<select class="form-control" id="blocktype" name="blocktype">
+									<label for="block_type" class="control-label">Typ bloku:</label>
+									<select class="form-control" id="block_type" name="block_type">
 										<option value="singleblock">Pojedynczy wpis</option>
 										<option value="multipleblock">Slajder wpisów</option>
 										<option value="sliderblock">Slajder zdjęć</option>

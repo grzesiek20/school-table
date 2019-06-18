@@ -14,9 +14,9 @@
 	else
 	{
 		
-			$sdiv=$_GET['id_sdiv'];
+			$message=$_GET['id_message'];
 			mysqli_set_charset($polaczenie, "utf8");
-			$sql="UPDATE `sdiv` SET `visible` =0 where id_sdiv=".$sdiv.";";
+			$sql="UPDATE `message` SET `visible` =0 where id_message=".$message.";";
 			
 				if($polaczenie->query($sql)){
 					

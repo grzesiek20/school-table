@@ -3,7 +3,7 @@
 class randomize 
 {
 	private $id_number;
-	private $id_sdiv;
+	private $id_message;
 	private $number;
 	private $active;
 	private $drawn;
@@ -30,12 +30,12 @@ class randomize
 		}
 	
 	function setDrawnNumber($number){
-		$sql= "SELECT id_number FROM `randomize` WHERE number = '".$number."';";
+		$sql= "SELECT id FROM `randomize` WHERE number = '".$number."';";
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
 		$data = $rs->fetch_array();
 			
 		$sql="UPDATE `randomize` SET `drawn` = 1 WHERE number='".$number."';";
-		$sql.="UPDATE `sdiv` SET `content` ='".$number."' WHERE id_sdiv=7;";
+		$sql.="UPDATE `message` SET `content` ='".$number."' WHERE id_message=7;";
 		$sql.="INSERT INTO `history` (id_history, id_number) VALUES (NULL,'".$data['id_number']."');";
 		$rs = $this->hDB->multi_query($sql) or die ($this->hDB->error());
 		}
@@ -86,7 +86,7 @@ class randomize
 	}
 	
 	function getIdSdiv() {
-		return $this->id_sdiv;
+		return $this->id_message;
 	}
 	
 	function getNumber() {
@@ -107,7 +107,7 @@ class randomize
 	}
 	
 	function setIdSdiv() {
-		return $this->id_sdiv;
+		return $this->id_message;
 	}
 	
 	function setNumber() {

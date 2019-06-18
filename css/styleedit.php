@@ -67,40 +67,40 @@ h4{
 
 <?php
 	$table=$rezultat->fetch_assoc();
-		echo "#div".$table['id_diva']."{";
+		echo "#div".$table['id_panel']."{";
 		echo 'height:'.$table['height'].'px;';
-		echo 'width:'.$table['per_width'].'%;';
-		echo 'top:'.$table['topm'].'px;';
-		echo 'left:'.$table['per_leftm'].'%;';
-		echo 'background-color:'.$table['bgcolor'].';';
-		echo 'color:'.$table['fontcolor'].';';
+		echo 'width:'.$table['percent_width'].'%;';
+		echo 'top:'.$table['top_margin'].'px;';
+		echo 'left:'.$table['percent_left_margin'].'%;';
+		echo 'background-color:'.$table['background_color'].';';
+		echo 'color:'.$table['font_color'].';';
 		echo 'text-align:center;';
 		echo 'z-index:10;';
 		echo '}';
 
-		echo ".cust".$table['id_diva']."{";
-		echo 'font-size:'.$table['fontsize'].'px;';
+		echo ".cust".$table['id_panel']."{";
+		echo 'font-size:'.$table['font_size'].'px;';
 		echo '}';
 		
 
 	while($table=$rezultat->fetch_assoc()) { 
-		echo "#div".$table['id_diva']."{";
+		echo "#div".$table['id_panel']."{";
 		echo 'height:'.$table['height'].'px;';
-		echo 'width:'.$table['per_width'].'%;';
-		echo 'top:'.$table['topm'].'px;';
-		echo 'left:'.$table['per_leftm'].'%;';
-		echo 'background-color:'.$table['bgcolor'].';';
-		echo 'color:'.$table['fontcolor'].';';
+		echo 'width:'.$table['percent_width'].'%;';
+		echo 'top:'.$table['top_margin'].'px;';
+		echo 'left:'.$table['percent_left_margin'].'%;';
+		echo 'background-color:'.$table['background_color'].';';
+		echo 'color:'.$table['font_color'].';';
 		echo '}';
 		
-		echo ".head".$table['id_diva']."{";
-		echo 'background-color:'.$table['headercolor'].' !important;';
-		echo 'font-size:'.$table['headerfsize'].'px;';
-		echo 'color:'.$table['headerfcolor'].' !important;';
+		echo ".head".$table['id_panel']."{";
+		echo 'background-color:'.$table['header_color'].' !important;';
+		echo 'font-size:'.$table['header_font_size'].'px;';
+		echo 'color:'.$table['header_font_color'].' !important;';
 		echo '}';
 		
-		echo ".cust".$table['id_diva']."{";
-		echo 'font-size:'.$table['fontsize'].'px;';
+		echo ".cust".$table['id_panel']."{";
+		echo 'font-size:'.$table['font_size'].'px;';
 		echo '}';
 	}
 ?>

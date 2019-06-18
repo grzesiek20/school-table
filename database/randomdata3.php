@@ -29,7 +29,7 @@
 			}
 
 			$random_cont = Array('Neque','porro','quisquam','est','qui','dolorem','ipsum','quia','dolor','sit','amet','consectetur','adipisci','velit');
-			$divsID= Array('11','9');
+			$panelsID= Array('11','9');
 			
 			for($i=0;$i<=$datacount;$i++)
 				{	
@@ -38,12 +38,12 @@
 						$content = $content.' '.$random_cont[$r];	
 					}
 			
-					$divindex = mt_rand(0,1);
-					$id_diva = $divsID[$divindex];
+					$panelindex = mt_rand(0,1);
+					$id_panel = $panelsID[$panelindex];
 					$index = mt_rand(0,count($user)-1);
 					$id_user = $user[$index];
 					
-					$sql="INSERT INTO `sdiv`(`id_sdiv`, `id_diva`, `id_user`, `content`) VALUES ('','{$id_diva}','{$id_user}','{$content}');";					
+					$sql="INSERT INTO `message`(`id_message`, `id_panel`, `id_user`, `content`) VALUES ('','{$id_panel}','{$id_user}','{$content}');";					
 					$polaczenie->query($sql);	
 					unset($content);
 				}

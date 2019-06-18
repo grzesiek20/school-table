@@ -2,8 +2,8 @@
 	require_once __DIR__."/../database/session.php";
 	require_once __DIR__."/../database/class/divclass.php";
 	
-	$div = new div();
-	$div->getDiv($_GET['id']);
+	$panel = new panel();
+	$panel->getDiv($_GET['id']);
 ?>
 
 
@@ -54,7 +54,7 @@
 								<input type="submit" id="no" name="no" value="Nie" class="btn btn-custom">
 							</div>
 						</div>
-							<input type="hidden" value="<?php echo $div->getIdDiv(); ?>" class="form-control" placeholder="id_diva" id="id_diva" name="id_diva">
+							<input type="hidden" value="<?php echo $panel->getIdDiv(); ?>" class="form-control" placeholder="id_panel" id="id_panel" name="id_panel">
 						</div>
                     </form>
                 </div>

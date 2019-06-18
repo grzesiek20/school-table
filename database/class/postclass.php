@@ -2,13 +2,13 @@
 
 class search
 {
-	private $id_sdiv;
+	private $id_message;
 	private $headertext;
 	private $name;
 	private $surname;
 	private $content;
-	private $begdate;
-	private $enddate;
+	private $begin_date;
+	private $end_date;
 	private $visible;
 	private $active;
 	
@@ -40,7 +40,7 @@ class search
 	
 	
 	function getIdSdiv() {
-		return $this->id_sdiv;
+		return $this->id_message;
 	}
 	
 	function getHeader() {
@@ -60,11 +60,11 @@ class search
 	}
 	
 	function getBegdate() {
-		return $this->begdate;
+		return $this->begin_date;
 	}
 	
 	function getEnddate() {
-		return $this->enddate;
+		return $this->end_date;
 	}
 	
 	function getVisible() {
@@ -79,8 +79,8 @@ class search
 	
 	//set
 	
-	function setIdSdiv($sdivID) {
-		$this->id_sdiv = $sdivID;;
+	function setIdSdiv($messageID) {
+		$this->id_message = $messageID;;
 	}
 	
 	function setHeader($header) {
@@ -99,12 +99,12 @@ class search
 		$this->content = $content;
 	}
 	
-	function setBegdate($begdate) {
-		$this->begdate = $begdate;
+	function setBegdate($begin_date) {
+		$this->begin_date = $begin_date;
 	}
 	
-	function setEnddate($enddate) {
-		$this->enddate = $enddate;
+	function setEnddate($end_date) {
+		$this->end_date = $end_date;
 	}
 	
 	function setVisible($visible) {
@@ -117,26 +117,26 @@ class search
 	
 //---------------------------------wyszukiwanie---------------------------------------------
 function searchSdivs(){
-	if($this->visible==2 && $this->begdate=='' && $this->enddate=='')
+	if($this->visible==2 && $this->begin_date=='' && $this->end_date=='')
 	{
-		$sql = "SELECT content ,begdate, enddate, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%');";
+		$sql = "SELECT content ,begin_date, end_date, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%');";
 	}
-	elseif($this->visible==2 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->visible==2 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT content ,begdate, enddate, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."';";
+		$sql = "SELECT content ,begin_date, end_date, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."';";
 	}
 	
-	elseif($this->visible==1 && $this->begdate=='' && $this->enddate=='')
+	elseif($this->visible==1 && $this->begin_date=='' && $this->end_date=='')
 	{
-		$sql = "SELECT content ,begdate, enddate, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND visible='".$this->visible."';";
+		$sql = "SELECT content ,begin_date, end_date, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND visible='".$this->visible."';";
 	}
-	elseif($this->visible==1 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->visible==1 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT content ,begdate, enddate, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."' AND visible='".$this->visible."';";
+		$sql = "SELECT content ,begin_date, end_date, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."' AND visible='".$this->visible."';";
 	}
 	
 	else{
-		$sql = "SELECT content ,begdate, enddate, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begdate >= '".$this->begdate."' AND enddate <= '".$this->enddate."' AND visible='".$this->visible."';";
+		$sql = "SELECT content ,begin_date, end_date, name, surname, header FROM `posts` WHERE header LIKE ('%".$this->headertext."%') AND name LIKE ('%".$this->name."%') AND surname LIKE ('%".$this->surname."%') AND content LIKE ('%".$this->content."%') AND begin_date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."' AND visible='".$this->visible."';";
 	}
 		
 		$rs = $this->hDB->query($sql);
@@ -146,8 +146,8 @@ function searchSdivs(){
 			$i=0;
 		while($data = $rs->fetch_array()){
 			$info[$i]['content'] = $data['content'];
-			$info[$i]['begdate'] = $data['begdate'];
-			$info[$i]['enddate'] = $data['enddate'];
+			$info[$i]['begin_date'] = $data['begin_date'];
+			$info[$i]['end_date'] = $data['end_date'];
 			$info[$i]['name'] = $data['name'];
 			$info[$i]['surname'] = $data['surname'];
 			$info[$i]['header'] = $data['header'];

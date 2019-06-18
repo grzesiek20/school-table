@@ -1,20 +1,20 @@
 <?php
 	
-class div 
+class panel 
 {
-	private $id_diva;
+	private $id_panel;
 	private $height;
-	private $per_width;
-	private $topm;
-	private $per_left;
-	private $bgcolor;
-	private $fontsize;
-	private $fontcolor;
+	private $percent_width;
+	private $top_margin;
+	private $percent_left;
+	private $background_color;
+	private $font_size;
+	private $font_color;
 	private $header;
-	private $headercolor;
-	private $headerfsize;
-	private $headerfcolor;
-	private $textalign;
+	private $header_color;
+	private $header_font_size;
+	private $header_font_color;
+	private $text_align;
 	private $active;
 	
 	private $hDB;
@@ -57,55 +57,55 @@ class div
 		
 	// }
 	
-	function getDiv($divID){
-		$sql = "SELECT * FROM `divy` WHERE id_diva='".$divID."';";
+	function getDiv($panelID){
+		$sql = "SELECT * FROM `panel` WHERE id_panel='".$panelID."';";
 		
 		$rs = $this->hDB->query($sql);
 		
 		$data = $rs->fetch_array();
-			$this->id_diva = $divID;
+			$this->id_panel = $panelID;
 			$this->height = $data['height'];
-			$this->per_width = $data['per_width'];
-			$this->topm = $data['topm'];
-			$this->per_leftm = $data['per_leftm'];
-			$this->bgcolor = $data['bgcolor'];
-			$this->fontsize = $data['fontsize'];
-			$this->fontcolor = $data['fontcolor'];
+			$this->percent_width = $data['percent_width'];
+			$this->top_margin = $data['top_margin'];
+			$this->percent_left_margin = $data['percent_left_margin'];
+			$this->background_color = $data['background_color'];
+			$this->font_size = $data['font_size'];
+			$this->font_color = $data['font_color'];
 			$this->headertext = $data['header'];
-			$this->headercolor = $data['headercolor'];
-			$this->headerfsize = $data['headerfsize'];
-			$this->headerfcolor = $data['headerfcolor'];
-			$this->textalign = $data['textalign'];
+			$this->header_color = $data['header_color'];
+			$this->header_font_size = $data['header_font_size'];
+			$this->header_font_color = $data['header_font_color'];
+			$this->text_align = $data['text_align'];
 			$this->active = $data['active'];
 	}
 
-	// function getDiv($divID){
-	// 	$stmt = $this->hDB->prepare("SELECT * FROM `divy` WHERE id_diva=?");
-	// 	$stmt->bind_param("i", $divID);
+	// function getDiv($panelID){
+	// 	$stmt = $this->hDB->prepare("SELECT * FROM `panel` WHERE id_panel=?");
+	// 	$stmt->bind_param("i", $panelID);
 	// 	$stmt->execute();
 	// 	//$rs = $this->hDB->query($sql);
 		
 	// 	$data = $stmt->fetch_array(MYSQLI_ASSOC);
-	// 		$this->id_diva = $divID;
+	// 		$this->id_panel = $panelID;
 	// 		$this->height = $data['height'];
-	// 		$this->per_width = $data['per_width'];
-	// 		$this->topm = $data['topm'];
-	// 		$this->per_leftm = $data['per_leftm'];
-	// 		$this->bgcolor = $data['bgcolor'];
-	// 		$this->fontsize = $data['fontsize'];
-	// 		$this->fontcolor = $data['fontcolor'];
+	// 		$this->percent_width = $data['percent_width'];
+	// 		$this->top_margin = $data['top_margin'];
+	// 		$this->percent_left_margin = $data['percent_left_margin'];
+	// 		$this->background_color = $data['background_color'];
+	// 		$this->font_size = $data['font_size'];
+	// 		$this->font_color = $data['font_color'];
 	// 		$this->headertext = $data['header'];
-	// 		$this->headercolor = $data['headercolor'];
-	// 		$this->headerfsize = $data['headerfsize'];
-	// 		$this->headerfcolor = $data['headerfcolor'];
-	// 		$this->textalign = $data['textalign'];
+	// 		$this->header_color = $data['header_color'];
+	// 		$this->header_font_size = $data['header_font_size'];
+	// 		$this->header_font_color = $data['header_font_color'];
+	// 		$this->text_align = $data['text_align'];
 	// 		$this->active = $data['active'];
 	// }
 
 	
 	function getAll() {
-		//$stmt = $this->hDB->prepare("SELECT * FROM `divy` WHERE active=1");
-		$sql = "SELECT * FROM `divy` WHERE active=1";
+		//$stmt = $this->hDB->prepare("SELECT * FROM `panel` WHERE active=1");
+		$sql = "SELECT * FROM `panel` WHERE active=1";
 		$info = array();
 		//$stmt->execute();
 		$rs = $this->hDB->query($sql);
@@ -113,19 +113,19 @@ class div
 		$i=0;
 		
 		while($data = $rs->fetch_array()){
-			$info[$i]['id_diva'] = $data['id_diva'];
+			$info[$i]['id_panel'] = $data['id_panel'];
 			$info[$i]['height'] = $data['height'];
-			$info[$i]['per_width'] = $data['per_width'];
-			$info[$i]['topm'] = $data['topm'];
-			$info[$i]['per_leftm'] = $data['per_leftm'];
-			$info[$i]['bgcolor'] = $data['bgcolor'];
-			$info[$i]['fontsize'] = $data['fontsize'];
-			$info[$i]['fontcolor'] = $data['fontcolor'];
+			$info[$i]['percent_width'] = $data['percent_width'];
+			$info[$i]['top_margin'] = $data['top_margin'];
+			$info[$i]['percent_left_margin'] = $data['percent_left_margin'];
+			$info[$i]['background_color'] = $data['background_color'];
+			$info[$i]['font_size'] = $data['font_size'];
+			$info[$i]['font_color'] = $data['font_color'];
 			$info[$i]['headertext'] = $data['header'];
-			$info[$i]['headercolor'] = $data['headercolor'];
-			$info[$i]['headerfsize'] = $data['headerfsize'];
-			$info[$i]['headerfcolor'] = $data['headerfcolor'];
-			$info[$i]['textalign'] = $data['textalign'];
+			$info[$i]['header_color'] = $data['header_color'];
+			$info[$i]['header_font_size'] = $data['header_font_size'];
+			$info[$i]['header_font_color'] = $data['header_font_color'];
+			$info[$i]['text_align'] = $data['text_align'];
 			$info[$i]['active'] = $data['active'];
 			$i++;
 		}
@@ -135,28 +135,28 @@ class div
 	
 	function addDiv()
     {
-		$sql="INSERT INTO `divy` (`id_diva`,`header`,`headercolor`,`headerfcolor`,`headerfsize`,`bgcolor`,`fontsize`,`fontcolor`,`topm`,`height`,`per_width`) VALUES(NULL,'".$this->headertext."','".$this->headercolor."','".$this->headerfcolor."','".$this->headerfsize."','".$this->bgcolor."','".$this->fontsize."','".$this->fontcolor."','".$this->topm."','".$this->height."','".$this->per_width."') ;";
+		$sql="INSERT INTO `panel` (`id_panel`,`header`,`header_color`,`header_font_color`,`header_font_size`,`background_color`,`font_size`,`font_color`,`top_margin`,`height`,`percent_width`) VALUES(NULL,'".$this->headertext."','".$this->header_color."','".$this->header_font_color."','".$this->header_font_size."','".$this->background_color."','".$this->font_size."','".$this->font_color."','".$this->top_margin."','".$this->height."','".$this->percent_width."') ;";
 
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
     }
 	
-	function updateDiv()
+	function updatePanel()
     {
-		$sql="UPDATE `divy` SET `header` = '".$this->headertext."', `headercolor` = '".$this->headercolor."', `headerfcolor` = '".$this->headerfcolor."', `headerfsize` = '".$this->headerfsize."', `bgcolor` = '".$this->bgcolor."', `fontsize` = '".$this->fontsize."', `fontcolor` = '".$this->fontcolor."', `textalign` = '".$this->textalign."' WHERE id_diva ='".$this->id_diva."';";
+		$sql="UPDATE `panel` SET `header` = '".$this->headertext."', `header_color` = '".$this->header_color."', `header_font_color` = '".$this->header_font_color."', `header_font_size` = '".$this->header_font_size."', `background_color` = '".$this->background_color."', `font_size` = '".$this->font_size."', `font_color` = '".$this->font_color."', `text_align` = '".$this->text_align."' WHERE id_panel ='".$this->id_panel."';";
 
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
     }
 	
-	function updateDivLocation()
+	function updatePanelLocation()
     {
-		$sql="UPDATE `location` SET `per_width` = '".$this->per_width."', `height` = '".$this->height."', `per_leftm` = '".$this->per_leftm."', `topm` = '".$this->topm."' WHERE `id_diva` ='".$this->id_diva."';";
+		$sql="UPDATE `location` SET `percent_width` = '".$this->percent_width."', `height` = '".$this->height."', `percent_left_margin` = '".$this->percent_left_margin."', `top_margin` = '".$this->top_margin."' WHERE `id_panel` ='".$this->id_panel."';";
 
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
     }
 	
 	
-	function deleteDiv($divID){
-		$sql = "UPDATE `divy` SET `active` = 0 WHERE id_diva='".$divID."';";
+	function deletePanel($panelID){
+		$sql = "UPDATE `panel` SET `active` = 0 WHERE id_panel='".$panelID."';";
 		
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
 	}
@@ -176,7 +176,7 @@ class div
 	}
 	
 	function getIdDiv() {
-		return $this->id_diva;
+		return $this->id_panel;
 	}
 	
 	function getHeight() {
@@ -184,27 +184,27 @@ class div
 	}
 	
 	function getPer_width() {
-		return $this->per_width;
+		return $this->percent_width;
 	}
 	
 	function getTopm() {
-		return $this->topm;
+		return $this->top_margin;
 	}
 	
 	function getPer_leftm() {
-		return $this->per_leftm;
+		return $this->percent_left_margin;
 	}
 	
 	function getBgcolor() {
-		return $this->bgcolor;
+		return $this->background_color;
 	}
 	
 	function getFontsize() {
-		return $this->fontsize;
+		return $this->font_size;
 	}
 	
 	function getFontcolor() {
-		return $this->fontcolor;
+		return $this->font_color;
 	}
 	
 	function getHeader() {
@@ -212,19 +212,19 @@ class div
 	}
 	
 	function getHeadercolor() {
-		return $this->headercolor;
+		return $this->header_color;
 	}
 	
 	function getHeaderfsize() {
-		return $this->headerfsize;
+		return $this->header_font_size;
 	}
 	
 	function getHeaderfcolor() {
-		return $this->headerfcolor;
+		return $this->header_font_color;
 	}
 	
 	function getTextalign() {
-		return $this->textalign;
+		return $this->text_align;
 	}
 	
 	function getActive() {
@@ -234,55 +234,55 @@ class div
 	
 	
 	function setIdDiv($DivID) {
-		$this->id_diva = $DivID;
+		$this->id_panel = $DivID;
 	}
 	
 	function setHeight($height) {
 		$this->height = $height;
 	}
 	
-	function setPer_width($per_width) {
-		$this->per_width = $per_width;
+	function setPer_width($percent_width) {
+		$this->percent_width = $percent_width;
 	}
 	
-	function setTopm($topm) {
-		$this->topm = $topm;
+	function setTopm($top_margin) {
+		$this->top_margin = $top_margin;
 	}
 	
-	function setPer_leftm($per_leftm) {
-		$this->per_leftm = $per_leftm;
+	function setPer_leftm($percent_left_margin) {
+		$this->percent_left_margin = $percent_left_margin;
 	}
 	
-	function setBgcolor($bgcolor) {
-		$this->bgcolor = $bgcolor;
+	function setBgcolor($background_color) {
+		$this->background_color = $background_color;
 	}
 	
-	function setFontsize($fontsize) {
-		$this->fontsize = $fontsize;
+	function setFontsize($font_size) {
+		$this->font_size = $font_size;
 	}
 	
-	function setFontcolor($fontcolor) {
-		$this->fontcolor = $fontcolor;
+	function setFontcolor($font_color) {
+		$this->font_color = $font_color;
 	}
 	
 	function setHeader($header) {
 		$this->headertext = $header;
 	}
 	
-	function setHeadercolor($headercolor) {
-		$this->headercolor = $headercolor;
+	function setHeadercolor($header_color) {
+		$this->header_color = $header_color;
 	}
 	
-	function setHeaderfsize($headerfsize) {
-		$this->headerfsize = $headerfsize;
+	function setHeaderfsize($header_font_size) {
+		$this->header_font_size = $header_font_size;
 	}
 	
-	function setHeaderfcolor($headerfcolor) {
-		$this->headerfcolor = $headerfcolor;
+	function setHeaderfcolor($header_font_color) {
+		$this->header_font_color = $header_font_color;
 	}
 	
-	function setTextalign($textalign) {
-		$this->textalign = $textalign;
+	function setTextalign($text_align) {
+		$this->text_align = $text_align;
 	}
 	
 	function setActive($active) {

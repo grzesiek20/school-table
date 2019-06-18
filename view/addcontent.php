@@ -55,24 +55,24 @@
 								echo '<div class="row">';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
-													echo '<label for="begdate" class="control-label">Data początkowa</label>';
+													echo '<label for="begin_date" class="control-label">Data początkowa</label>';
 													echo '<input readonly="readonly" value="';
-													if(isset($_SESSION['begdate'])){
-														echo $_SESSION['begdate'];
-														unset($_SESSION['begdate']);
+													if(isset($_SESSION['begin_date'])){
+														echo $_SESSION['begin_date'];
+														unset($_SESSION['begin_date']);
 													}
-													echo '" class="form-control" placeholder="begdate" id="begdate" name="begdate">';
+													echo '" class="form-control" placeholder="begin_date" id="begin_date" name="begin_date">';
 												echo '</div>';
 											echo '</div>';
 											echo '<div class="col-md-6">';
 												echo '<div class="form-group label-floating">';
-													echo '<label for="enddate" class="control-label">Data końcowa</label>';
+													echo '<label for="end_date" class="control-label">Data końcowa</label>';
 													echo '<input readonly="readonly" value="';
-													if(isset($_SESSION['enddate'])){
-														echo $_SESSION['enddate'];
-														unset($_SESSION['enddate']);
+													if(isset($_SESSION['end_date'])){
+														echo $_SESSION['end_date'];
+														unset($_SESSION['end_date']);
 													}
-													echo '" class="form-control" placeholder="enddate" id="enddate" name="enddate">';
+													echo '" class="form-control" placeholder="end_date" id="end_date" name="end_date">';
 												echo '</div>';
 											echo '</div>';
 									echo '</div>';

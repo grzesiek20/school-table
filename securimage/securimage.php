@@ -985,7 +985,7 @@ class Securimage
      *
      * @var int
      */
-    protected $gdbgcolor;
+    protected $gdbackground_color;
 
     /**
      * The GD color for the text color
@@ -1860,7 +1860,7 @@ class Securimage
     protected function allocateColors()
     {
         // allocate bg color first for imagecreate
-        $this->gdbgcolor = imagecolorallocate($this->im,
+        $this->gdbackground_color = imagecolorallocate($this->im,
                                               $this->image_bg_color->r,
                                               $this->image_bg_color->g,
                                               $this->image_bg_color->b);
@@ -1913,12 +1913,12 @@ class Securimage
         // set background color of image by drawing a rectangle since imagecreatetruecolor doesn't set a bg color
         imagefilledrectangle($this->im, 0, 0,
                              $this->image_width, $this->image_height,
-                             $this->gdbgcolor);
+                             $this->gdbackground_color);
 
         if ($this->perturbation > 0) {
             imagefilledrectangle($this->tmpimg, 0, 0,
                                  $this->image_width * $this->iscale, $this->image_height * $this->iscale,
-                                 $this->gdbgcolor);
+                                 $this->gdbackground_color);
         }
 
         if ($this->bgimg == '') {

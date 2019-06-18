@@ -5,13 +5,13 @@ class draw
 	private $id_history;
 	private $id_number;
 	private $drawdate;
-	private $id_sdiv;
+	private $id_message;
 	private $number;
 	private $drawn;
 	private $active;
 	
-	private $begdate;
-	private $enddate;
+	private $begin_date;
+	private $end_date;
 	
 	private $hDB;
 	
@@ -41,7 +41,7 @@ class draw
 	
 	
 	function getIdSdiv() {
-		return $this->id_sdiv;
+		return $this->id_message;
 	}
 	
 	function getIdNumber() {
@@ -72,8 +72,8 @@ class draw
 	
 	//set
 	
-	function setIdSdiv($sdivID) {
-		$this->id_sdiv = $sdivID;;
+	function setIdSdiv($messageID) {
+		$this->id_message = $messageID;
 	}
 	
 	function setIdNumber($id_number) {
@@ -100,32 +100,32 @@ class draw
 		$this->active = $active;
 	}
 	
-	function setBegdate($begdate) {
-		$this->begdate = $begdate;
+	function setBegdate($begin_date) {
+		$this->begin_date = $begin_date;
 	}	
 	
-	function setEnddate($enddate) {
-		$this->enddate = $enddate;
+	function setEnddate($end_date) {
+		$this->end_date = $end_date;
 	}	
 	
 //---------------------------------wyszukiwanie---------------------------------------------
 function searchNumbers(){
-	if($this->drawn==2 && $this->begdate=='' && $this->enddate=='')
+	if($this->drawn==2 && $this->begin_date=='' && $this->end_date=='')
 	{
 		$sql = "SELECT number FROM `randomize` WHERE active =1;";
 	}
-	elseif($this->drawn==2 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->drawn==2 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT id_number, date FROM `history` WHERE `date` >= '".$this->begdate."' AND `date` <= '".$this->enddate."';";
+		$sql = "SELECT id_number, date FROM `history` WHERE `date` >= '".$this->begin_date."' AND `date` <= '".$this->end_date."';";
 	}
 	
-	elseif($this->drawn==1 && $this->begdate=='' && $this->enddate=='')
+	elseif($this->drawn==1 && $this->begin_date=='' && $this->end_date=='')
 	{
 		$sql = "SELECT number FROM `randomize` WHERE active =1 AND drawn=1;";
 	}
-	elseif($this->drawn==1 && $this->begdate!='' && $this->enddate!='')
+	elseif($this->drawn==1 && $this->begin_date!='' && $this->end_date!='')
 	{
-		$sql = "SELECT id_number, date FROM `history` WHERE id_number= '".$this->number."' AND date >= '".$this->begdate."' AND enddate <= '".$this->enddate."';";
+		$sql = "SELECT id_number, date FROM `history` WHERE id_number= '".$this->number."' AND date >= '".$this->begin_date."' AND end_date <= '".$this->end_date."';";
 	}
 	
 	else{
@@ -138,7 +138,7 @@ function searchNumbers(){
 		{
 			$i=0;
 		while($data = $rs->fetch_array()){
-			if(($this->drawn==2 || $this->drawn==1) && $this->begdate!='' && $this->enddate!=''){
+			if(($this->drawn==2 || $this->drawn==1) && $this->begin_date!='' && $this->end_date!=''){
 			$info[$i]['number'] = $data['id_number'];
 			$info[$i]['date'] = $data['date'];
 			}else{

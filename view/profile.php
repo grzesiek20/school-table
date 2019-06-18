@@ -57,48 +57,47 @@
 								<div class="form-group label-floating">
 									<label for="name" class="control-label">Imię</label>
 									<input type="text" value="<?php
-									if(isset($_SESSION['name'])) {
-										echo $_SESSION['name'];
-										unset ($_SESSION['name']);
+									if(isset($_SESSION['username'])) {
+										echo $_SESSION['username'];
 									} ?>" class="form-control" placeholder="" id="name" name="name">
 								</div>
 								<div class="form-group label-floating">
 									<label for="surname" class="control-label">Nazwisko</label>
 									<input type="text" value="<?php
-									if(isset($_SESSION['surname'])) {
-										echo $_SESSION['surname'];
-										unset ($_SESSION['surname']);
+									if(isset($_SESSION['usersurname'])) {
+										echo $_SESSION['usersurname'];
 									} ?>"class="form-control" placeholder="" id="surname" name="surname">
 								</div>
 							</br>
-							<h4 class="panel-title section">Dane logowania</h4>
+							<h4 class="panel-title section">Zmiana hasła</h4>
 								<div class="form-group label-floating">
-									<label for="login" class="control-label">Login</label>
-									<input type="text" class="form-control" placeholder="" id="login" name="login">
+									<label for="oldpassword" class="control-label">Stare hasło</label>
+									<input type="password" class="form-control" placeholder="" id="oldpassword" name="oldpassword">
 								</div>
 								<div class="form-group label-floating">
-									<label for="password1" class="control-label">Hasło</label>
+									<label for="password1" class="control-label">Nowe hasło</label>
 									<input type="password" class="form-control" placeholder="" id="password1" name="password1">	
 								</div>
 								<div class="form-group label-floating">
 									<label for="password2" class="control-label">Powtórz hasło</label>
 									<input type="password" class="form-control" placeholder="" id="password2" name="password2">	
 								</div>
-								<div class="row section form-group label-floating">
-									<label for="role" class="control-label">Rola użytkownika:</label>
-									<select class="form-control" id="role" name="role">
-										<option value="User">Użytkownik</option>
-										<option value="Administrator">Administrator</option>
-									</select>
-								</div>
-								<div id='captcha_container_1' class="panel-title section">
-									<?php echo Securimage::getCaptchaHtml($options); ?>
-								</div>
+								<?php
+								if($_SESSION['role'] == 1) {
+									echo '<div class="row section form-group label-floating">';
+									echo '<label for="role" class="control-label">Rola użytkownika:</label>';
+									echo '<select class="form-control" id="role" name="role">';
+									echo	'<option value="User">Użytkownik</option>';
+									echo	'<option value="Administrator">Administrator</option>';
+									echo '</select>';
+								echo '</div>';
+								}
+								?>
 							</div>
 						</div>
                         <div class="pull-right">
 							<input type="submit" id="back" name="back" value="Powrót" class="btn btn-custom">
-                            <input type="submit" id="submit" name="submit" value="Zapisz" class="btn btn-custom">
+                            <input type="submit" id="update" name="update" value="Zapisz" class="btn btn-custom">
                         </div>
                     </form>
                 </div>

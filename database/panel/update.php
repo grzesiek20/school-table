@@ -1,18 +1,30 @@
 <?php
 
 	require_once __DIR__."/../class/divclass.php";
+	require_once __DIR__."/../class/validator.php";
 
-	$div= new div();
-
-					$div->setIdDiv($_POST['id_diva']);
-					$div->setPer_width($_POST['per_width']);
-					$div->setHeight($_POST['height']);
-					$div->setPer_leftm($_POST['per_leftm']);
-					$div->setTopm($_POST['topm']);
-					
-					$div->updateDivLocation();
-					
-					header('Location: ../../index.php');
-					exit;	
-				
+	$panel= new panel();
+	$validator = new validator();
+	if ($validator->checkNumber($_POST['id_panel'])) {
+		$panel->setIdDiv($_POST['id_panel']);
+	}
+	if ($validator->checkNumber($_POST['percent_width'])) {
+		$panel->setPer_width($_POST['percent_width']);
+	}
+	if ($validator->checkNumber($_POST['height'])) {
+		$panel->setHeight($_POST['height']);
+	}
+	if ($validator->checkNumber($_POST['height'])) {
+		$panel->setHeight($_POST['height']);
+	}
+	if ($validator->checkNumber($_POST['percent_left_margin'])) {
+		$panel->setPer_leftm($_POST['percent_left_margin']);
+	}
+	if ($validator->checkNumber($_POST['top_margin'])) {
+		$panel->setTopm($_POST['top_margin']);
+	}
+		$panel->updatePanelLocation();
+		
+		header('Location: ../../index.php');
+		exit;	
 ?>

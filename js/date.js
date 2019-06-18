@@ -23,14 +23,14 @@ jQuery(function($){
 });
 
 $(function() {
-     $( "#begdate" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
+     $( "#begin_date" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
 });
 
 $(function() {
-     $( "#enddate" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
+     $( "#end_date" ).datepicker({ dateFormat: 'yy-mm-dd'}); 
 });
 
 function resetnews(){
-	$( "#begdate" ).val('0000-00-00'); 
-	$( "#enddate" ).val('0000-00-00'); 
+	$( "#begin_date" ).val('0000-00-00'); 
+	$( "#end_date" ).val('0000-00-00'); 
 }

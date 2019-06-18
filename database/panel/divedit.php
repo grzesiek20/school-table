@@ -7,8 +7,8 @@ require_once __DIR__."/../class/validator.php";
 
 
 
-$div = new div();
-$sdiv = new sdiv();
+$panel = new panel();
+$message = new message();
 $randomize = new randomize();
 
 //unset($Error);
@@ -20,80 +20,98 @@ if(isset($_POST['back'])){
 
 	if(isset($_POST['submit'])){
 			//$header = htmlentities($_POST['header'], ENT_QUOTES, "UTF-8");
-		$div->setIdDiv($_POST['id_diva']);
-		//$div->setBlockType()
-		$div->setHeader($_POST['header']);
+		$panel->setIdDiv($_POST['id_panel']);
+		//$panel->setBlockType()
+		$panel->setHeader(htmlentities($_POST['header']));
 		$_SESSION['header'] = $_POST['header'];
 
-		$div->setHeadercolor(validator::formatColor($_POST['headercolor']));
-		if (validator::checkColor($div->getHeadercolor()) != true) {
+		$panel->setHeadercolor(validator::formatColor($_POST['header_color']));
+		if (validator::checkColor($panel->getHeadercolor()) != true) {
 			$Error = "Zły kolor nagłówka!";
 		} else {
-			$_SESSION['headercolor'] = $_POST['headercolor'];
+			$_SESSION['header_color'] = $_POST['header_color'];
 		}
-		$div->setHeaderfcolor(validator::formatColor($_POST['headerfcolor']));
-		if (validator::checkColor($div->getHeaderfcolor()) != true) {
+		$panel->setHeaderfcolor(validator::formatColor($_POST['header_font_color']));
+		if (validator::checkColor($panel->getHeaderfcolor()) != true) {
 			$Error = "Zły kolor czcionki nagłówka!";
 		} else {
-			$_SESSION['headerfcolor'] = $_POST['headerfcolor'];
+			$_SESSION['header_font_color'] = $_POST['header_font_color'];
 		}
 			
-		$div->setHeaderfsize($_POST['headerfsize']);
+		$panel->setHeaderfsize(validator::checkNumber($_POST['header_font_size']));
+		if (validator::checkNumber($panel->getHeaderfsize()) != true) {
+			$Error = "Zła wartość rozmiaru czcionki!";
+		} else {
+			$_SESSION['header_font_size'] = $_POST['header_font_size'];
+		}
 
-		$div->setBgcolor(validator::formatColor($_POST['bgcolor']));
-		if (validator::checkColor($_POST['bgcolor']) != true) {
+		$panel->setBgcolor(validator::formatColor($_POST['background_color']));
+		if (validator::checkColor($_POST['background_color']) != true) {
 			$Error = "Zły kolor tła!";
 		} else {
-			$_SESSION['bgcolor'] = $_POST['bgcolor'];
+			$_SESSION['background_color'] = $_POST['background_color'];
 		}
 
-		$div->setFontsize($_POST['fontsize']);
-		$_SESSION['fontsize'] = $_POST['fontsize'];
 
-		$div->setFontcolor(validator::formatColor($_POST['fontcolor']));
-		if (validator::checkColor($div->getFontcolor()) != true) {
+		$panel->setFontsize(validator::checkNumber($_POST['font_size']));
+		if (validator::checkNumber($panel->getFontSize()) != true) {
+			$Error = "Zła wartość rozmiaru czcionki!";
+		} else {
+			$_SESSION['font_size'] = $_POST['font_size'];
+		}
+
+		$panel->setFontcolor(validator::formatColor($_POST['font_color']));
+		if (validator::checkColor($panel->getFontcolor()) != true) {
 			$Error = "Zły kolor czcionki!";
 		} else {
-			$_SESSION['fontcolor'] = $_POST['fontcolor'];
+			$_SESSION['font_color'] = $_POST['font_color'];
 		}
 
-		$div->setTextalign($_POST['textalign']);
-		$_SESSION['textalign'] = $_POST['textalign'];
+		if ($_POST['text_align'] == 'justify' 
+		|| $_POST['text_align'] == 'center'
+		|| $_POST['text_align'] == 'left'
+		|| $_POST['text_align'] == 'right') {
+			$panel->setTextalign($_POST['text_align']);
+			$_SESSION['text_align'] = $_POST['text_align'];
+		} else {
+			$Error = "Zła wartość rozmieszczenia tekstu!";
+		}
 
-		if($_POST['id_diva']==8){
+
+		if($_POST['id_panel']==8){
 			$randomize->setMax($_POST['numbers']);
 		}
 		if (!$Error) {
 			unset($_SESSION['Error']);
 			unset($_SESSION['header']);
-			unset($_SESSION['headercolor']);
-			unset($_SESSION['headerfcolor']);
-			unset($_SESSION['headerfsize']);
-			unset($_SESSION['bgcolor']);
-			unset($_SESSION['fontsize']);
-			unset($_SESSION['fontcolor']);
-			unset($_SESSION['textalign']);
-			$div->updateDiv();
+			unset($_SESSION['header_color']);
+			unset($_SESSION['header_font_color']);
+			unset($_SESSION['header_font_size']);
+			unset($_SESSION['background_color']);
+			unset($_SESSION['font_size']);
+			unset($_SESSION['font_color']);
+			unset($_SESSION['text_align']);
+			$panel->updatePanel();
 			header('Location: ../../index.php');
 			exit;
 		} else {
 			$_SESSION['Error'] = '<span style="color:red">'.$Error.'</span>';
-			header('Location: ../../view/edit.php?id='.$_POST['id_diva']);
+			header('Location: ../../view/edit.php?id='.$_POST['id_panel']);
 			exit;
 		}
 	}
 		
 	if(isset($_POST['yes'])){
-		$div->deleteDiv($_POST['id_diva']);
+		$panel->deletePanel($_POST['id_panel']);
 		unset($_SESSION['Error']);
 		unset($_SESSION['header']);
-		unset($_SESSION['headercolor']);
-		unset($_SESSION['headerfcolor']);
-		unset($_SESSION['headerfsize']);
-		unset($_SESSION['bgcolor']);
-		unset($_SESSION['fontsize']);
-		unset($_SESSION['fontcolor']);
-		unset($_SESSION['textalign']);
+		unset($_SESSION['header_color']);
+		unset($_SESSION['header_font_color']);
+		unset($_SESSION['header_font_size']);
+		unset($_SESSION['background_color']);
+		unset($_SESSION['font_size']);
+		unset($_SESSION['font_color']);
+		unset($_SESSION['text_align']);
 				
 		header('Location: ../../index.php');
 		exit;	
@@ -103,13 +121,13 @@ if(isset($_POST['back'])){
 	if(isset($_POST['no'])){
 		unset($_SESSION['Error']);
 		unset($_SESSION['header']);
-		unset($_SESSION['headercolor']);
-		unset($_SESSION['headerfcolor']);
-		unset($_SESSION['headerfsize']);
-		unset($_SESSION['bgcolor']);
-		unset($_SESSION['fontsize']);
-		unset($_SESSION['fontcolor']);
-		unset($_SESSION['textalign']);
+		unset($_SESSION['header_color']);
+		unset($_SESSION['header_font_color']);
+		unset($_SESSION['header_font_size']);
+		unset($_SESSION['background_color']);
+		unset($_SESSION['font_size']);
+		unset($_SESSION['font_color']);
+		unset($_SESSION['text_align']);
 		header('Location: ../../index.php');
 		exit;	
 	}
@@ -118,29 +136,17 @@ if(isset($_POST['back'])){
 		$randomize->resetLos();
 		unset($_SESSION['Error']);
 		unset($_SESSION['header']);
-		unset($_SESSION['headercolor']);
-		unset($_SESSION['headerfcolor']);
-		unset($_SESSION['headerfsize']);
-		unset($_SESSION['bgcolor']);
-		unset($_SESSION['fontsize']);
-		unset($_SESSION['fontcolor']);
+		unset($_SESSION['header_color']);
+		unset($_SESSION['header_font_color']);
+		unset($_SESSION['header_font_size']);
+		unset($_SESSION['background_color']);
+		unset($_SESSION['font_size']);
+		unset($_SESSION['font_color']);
 		header('Location: ../../index.php');
 		exit;	
 	} else {
-		$div->getDiv($_GET['id']);
-		$sdiv->getAllDESC($_GET['id']);
-		$textalign= $div->getTextalign();
+		$panel->getDiv($_GET['id']);
+		$message->getAllDESC($_GET['id']);
+		$text_align= $panel->getTextalign();
 	}
-
-
-// class Subt
-// {	
-// function sliderheight()
-// {
-	// $sql= "SELECT * FROM slider;";
-	// return $sql;
-// }
-
-
-// }
 ?>

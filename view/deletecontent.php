@@ -32,8 +32,8 @@
 </head>
 
 <?php
-	$sdiv= new sdiv();
-	$sdiv->getSdiv($_GET['sdiv']);
+	$message= new message();
+	$message->getSdiv($_GET['sdiv']);
 ?>
 
 <body>
@@ -56,8 +56,8 @@
 									<input type="submit" id="no" name="no" value="Nie" class="btn btn-custom">
 								</div>
 							</div>
-									<input type="hidden" value="<?php echo $_GET['sdiv']; ?>" class="form-control" placeholder="id_sdiv" id="id_sdiv" name="id_sdiv">
-									<input type="hidden" value="<?php echo $sdiv->getIdDiv(); ?>" class="form-control" placeholder="id_div" id="id_div" name="id_div">
+									<input type="hidden" value="<?php echo $_GET['sdiv']; ?>" class="form-control" placeholder="id_message" id="id_message" name="id_message">
+									<input type="hidden" value="<?php echo $message->getIdDiv(); ?>" class="form-control" placeholder="id_div" id="id_div" name="id_div">
 							</div>
                     </form>
                 </div>

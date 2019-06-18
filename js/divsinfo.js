@@ -42,16 +42,16 @@ $( function() {
   		$( ".block" ).mouseup(function() {
 			
 //======================= responsywność===========================================================
-			var id_diva = $(this).attr('id').substr(3);                                         //
+			var id_panel = $(this).attr('id').substr(3);                                         //
 			var height = $(this).height();                                                     //
-			var per_width = Math.round($(this).width()/$(this).parent().width()*100);          // procentowa szerokość
-			var per_leftm = Math.round($(this).position().left/$(this).parent().width()*100);  // procentowy margines lewy
-			var topm = $(this).position().top;                                                 // odległośc od góry
+			var percent_width = Math.round($(this).width()/$(this).parent().width()*100);          // procentowa szerokość
+			var percent_left_margin = Math.round($(this).position().left/$(this).parent().width()*100);  // procentowy margines lewy
+			var top_margin = $(this).position().top;                                                 // odległośc od góry
 			
-			$(this).width(per_width+"%");     //ustawianie wartości
-			$(this).css("left",per_leftm+"%");
+			$(this).width(percent_width+"%");     //ustawianie wartości
+			$(this).css("left",percent_left_margin+"%");
 
-		if(id_diva == 1)
+		if(id_panel == 1)
 			$(this).css("zIndex",1);
 		else
 			$(this).css("zIndex",0);
@@ -60,11 +60,11 @@ $( function() {
                 url: "./database/panel/update.php",
                 type: "POST",
                 data: {
-                    id_diva:id_diva, 
-					per_width:per_width, 
+                    id_panel:id_panel, 
+					percent_width:percent_width, 
 					height:height,
-					per_leftm:per_leftm, 
-					topm:topm
+					percent_left_margin:percent_left_margin, 
+					top_margin:top_margin
                 },
                 cache: false,
                 success: function() {

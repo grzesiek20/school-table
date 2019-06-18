@@ -1,8 +1,8 @@
 <?php
 	
 	require_once "class/sdivclass.php";
-	$sdiv=new sdiv();
-	$plan= $sdiv->getPlan($_POST['gkoniec']);
+	$message=new message();
+	$plan= $message->getPlan($_POST['end_hour']);
 	
 	echo $plan;
 
