@@ -37,12 +37,13 @@ if(isset($_POST['back'])){
 		} else {
 			$_SESSION['header_font_color'] = $_POST['header_font_color'];
 		}
-			
-		$panel->setHeaderfsize(validator::checkNumber($_POST['header_font_size']));
-		if (validator::checkNumber($panel->getHeaderfsize()) != true) {
-			$Error = "Zła wartość rozmiaru czcionki!";
-		} else {
+		
+		// $panel->setHeaderfsize(validator::checkNumber($_POST['header_font_size']));
+		if (validator::checkNumber($_POST['header_font_size'])) {
+			$panel->setHeaderfsize($_POST['header_font_size']);
 			$_SESSION['header_font_size'] = $_POST['header_font_size'];
+		} else {
+			$Error = "Zła wartość rozmiaru czcionki!";
 		}
 
 		$panel->setBgcolor(validator::formatColor($_POST['background_color']));
@@ -53,11 +54,12 @@ if(isset($_POST['back'])){
 		}
 
 
-		$panel->setFontsize(validator::checkNumber($_POST['font_size']));
-		if (validator::checkNumber($panel->getFontSize()) != true) {
-			$Error = "Zła wartość rozmiaru czcionki!";
-		} else {
+		
+		if (validator::checkNumber($_POST['font_size'])) {
+			$panel->setFontsize($_POST['font_size']);
 			$_SESSION['font_size'] = $_POST['font_size'];
+		} else {
+			$Error = "Zła wartość rozmiaru czcionki!";
 		}
 
 		$panel->setFontcolor(validator::formatColor($_POST['font_color']));
