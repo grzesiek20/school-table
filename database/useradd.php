@@ -14,12 +14,12 @@ if (isset($_POST['submit'])) {
 
     $logger->wh_log(__METHOD__, "Info", "Dodawanie użytkownika\n");
 
-    $securimage = new Securimage();
-    $captcha = $_POST['captcha_input'];
+    // $securimage = new Securimage();
+    // $captcha = $_POST['captcha_input'];
 
-    if ($securimage->check($captcha) == false) {
-        $Error = 'Kod z obrazka jest błędny!';
-    }
+    // if ($securimage->check($captcha) == false) {
+    //     $Error = 'Kod z obrazka jest błędny!';
+    // }
     if($_POST['password1'] != $_POST['password2']) {
         $Error = "Wprowadzone hasła są różne!";
     }

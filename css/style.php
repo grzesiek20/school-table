@@ -6,6 +6,74 @@
 	require_once __DIR__."/../database/conf.php";	
 ?>
 
+.overlay {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,156,138);
+  background-color: rgba(0,156,138, 0.9);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+#menu {
+	width:100%;
+	height:15px;
+	z-index:3 !important;
+	position:absolute !important;
+}
+
+.menuicons {
+	text-align:center !important;
+}
+
+.menuicon {
+	font-size:20px !important;
+	cursor:pointer;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color:#333333;
+  display: block;
+  transition: 0.3s;
+  height:20px;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color:white;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+
 body
 {
 	background-color: #eeeeee;
@@ -52,6 +120,10 @@ body
 	color:black;
 }
 
+.icotext {
+	font-size:15px;
+}
+
 .icons{
 	color:#333333;
 	font-size:15px;
@@ -89,6 +161,8 @@ body
 			echo "background-color:".$panels[$i]['background_color'].";\n";
 			echo "color:".$panels[$i]['font_color'].";\n";
 			echo "text-align:".$panels[$i]['text_align'].";\n";
+			echo "margin-top:auto\n";
+			echo "margin-bottom:auto\n";
 			echo "z-index:1;\n";
 			echo "}\n\n";
 			echo ".cust".$panels[$i]['id_panel']."{\n";

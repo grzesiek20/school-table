@@ -188,15 +188,17 @@
 									</br>
 								
 								<?php
-								if($_GET['id']!=2&&
-								$_GET['id']!=3&&
-								$_GET['id']!=4&&
-								$_GET['id']!=5&& // jeśli inne, niż wszystkie z wyświetlanym JavaScriptem
-								$_GET['id']!=8&&
-								$_GET['id']!=10)
+								// if($_GET['id']!=2&&
+								// $_GET['id']!=3&&
+								// $_GET['id']!=4&&
+								// $_GET['id']!=5&& // jeśli inne, niż wszystkie z wyświetlanym JavaScriptem
+								// $_GET['id']!=8&&
+								// $_GET['id']!=10)
+								if ($panel->getBlockType()=='singleblock' ||
+									$panel->getBlockType()=='multipleblock')
 								{
-								$messages = $message->getAllDESC($_GET['id']);
-								$k=1;
+									$messages = $message->getAllDESC($_GET['id']);
+									$k=1;
 								for($i=0; $i<count($messages);$i++){
 								echo '<div class="row">';
 									echo '<div class="col-md-6">';                    // wyświetlanie zawartych treści do edycji

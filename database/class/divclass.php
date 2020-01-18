@@ -166,7 +166,14 @@ class panel
 		$query = "UPDATE `panel` SET `header_text` = ?, `header_color` = ?, `header_font_color` = ?, `header_font_size` = ?, `background_color` = ?, `font_size` = ?, `font_color` = ?, `text_align` = ? WHERE id_panel =?;";
 		$stmt = $this->hDB->prepare($query);
 		$stmt->bind_param("sssisissi", $this->header_text, $this->header_color, $this->header_font_color, $this->header_font_size, $this->background_color, $this->font_size, $this->font_color, $this->text_align, $this->id_panel);
-		$stmt->execute();
+		if($stmt->execute()) {
+			Logger::wh_log(__METHOD__,"Success", "Poprawnie zaktualizowano panel:\n".$this->writeData());
+		} else {
+			Logger::wh_log(__METHOD__,"Error", "Panel nie został zaktualizowany:\n".$this->writeData());
+			$error = $this->hDB->errno . ' ' . $this->hDB->error;
+			Logger::wh_log(__METHOD__,"Error", $error);
+			
+		}
 		$stmt->close();
     }
 	

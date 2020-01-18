@@ -91,9 +91,6 @@
 										<option value="Administrator">Administrator</option>
 									</select>
 								</div>
-								<div id='captcha_container_1' class="panel-title section">
-									<?php echo Securimage::getCaptchaHtml($options); ?>
-								</div>
 							</div>
 						</div>
                         <div class="pull-right">

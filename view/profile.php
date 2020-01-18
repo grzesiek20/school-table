@@ -88,7 +88,7 @@
 									echo '<label for="role" class="control-label">Rola użytkownika:</label>';
 									echo '<select class="form-control" id="role" name="role">';
 									echo	'<option value="User">Użytkownik</option>';
-									echo	'<option value="Administrator">Administrator</option>';
+									echo	'<option value="Administrator" selected >Administrator</option>';
 									echo '</select>';
 								echo '</div>';
 								}

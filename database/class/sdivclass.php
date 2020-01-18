@@ -179,14 +179,14 @@ class message
 		$stmt->close();
 	}
 	
-	function getPosts(){
+	function getPosts($id){
 		$sql= "UPDATE `message` SET `visible` = 0 WHERE end_date<CURRENT_DATE() AND end_date<>'0000-00-00'";
 		$rs = $this->hDB->query($sql) or die ($this->hDB->error());
-		$sql = "SELECT id_panel FROM `panel` WHERE `block_type` = 'multipleblock';";
-		$data = $this->hDB->query($sql);
-			if ($data->num_rows==1) {
-				$result=$data->fetch_array();
-				$sql = "SELECT * FROM `message` WHERE id_panel=".$result['id_panel']." AND active=1 AND visible=1 AND ((begin_date<=CURRENT_DATE() AND end_date>=CURRENT_DATE()) OR (begin_date='0000-00-00' AND end_date='0000-00-00')) ORDER BY id_message DESC;";
+		//$sql = "SELECT id_panel FROM `panel` WHERE `block_type` = 'multipleblock' AND active =1;";
+		//$data = $this->hDB->query($sql);
+		//	if ($data->num_rows==1) {
+				//$result=$data->fetch_array();
+				$sql = "SELECT * FROM `message` WHERE id_panel=".$id." AND active=1 AND visible=1 AND ((begin_date<=CURRENT_DATE() AND end_date>=CURRENT_DATE()) OR (begin_date='0000-00-00' AND end_date='0000-00-00')) ORDER BY id_message DESC;";
 		
 				if($data = $this->hDB->query($sql))
 					$ile_wierszy = $data->num_rows;
@@ -197,8 +197,8 @@ class message
 					$news=$news.";;".$post['content'];
 				}
 				
-				return $news."~".$ile_wierszy;
-			}
+				return $news;
+		//	}
 	}
 	
 	

@@ -41,12 +41,39 @@
 
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
-<body onload="bazaAjax();newAjax();odliczanie();prepare()">
-		<div id="container" class="container">
-<?php		
+<body onload="prepare();bazaAjax();newAjax();odliczanie();">
+	<div id="container" class="container">
+<?php
+	echo '<div class="overlay" id="myNav">';
+	//echo '<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+	echo '<div class="col-md-12"></div>';
+if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
+	//echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
+	echo '<div class="pull-left"><div class="text-center"><a href="view/add.php"><i class="icon-plus-2"></br><div class="icotext">Dodaj blok</div></i></a></div></div>';
+	echo '<div class="pull-left"><div class="text-center"><a href="view/profile.php"><i class="icon-user menuicons"></br><div class="icotext">Dane użytkownika</div></i></a></div></div>';
+	if ($_SESSION['role'] == 1) {
+		echo '<div class="pull-left"><div class="text-center"><a href="view/useradd.php"><i class="icon-user-plus menuicons"></br><div class="icotext">Dodaj użytkownika</div></i></a></div></div>';
+	}
+	echo '<div class="pull-right"><div class="text-center"><a href="database/logout.php"><i class="icon-logout"></br><div class="icotext">Wyloguj</div></i></a></div></div>'; //wylogowanie			
+} else {
+	echo '<div class="pull-right"><div class="text-center"><a href="view/login.php"><i class="icon-login menuicons"></br><div class="icotext">Zaloguj</div></i></a></div></div>'; //logowanie
+}
+							
+	//echo '</div>';
+	echo '</div>';
+	//echo '</div>';
+	//echo '</div>';
+
+	echo '<div id="menu" class="showico"></div>';
+	// <span class="icons ico menuicon" onclick="openNav()">&#9776;</span>
+
+
 //=============================== Górny blok ==================================================
 for ($i=0; $i<count($panels);$i++){
 	if($panels[$i]['block_type']=='headblock'){
@@ -56,27 +83,19 @@ for ($i=0; $i<count($panels);$i++){
 		} else {
 			echo '<div class="welcome panel" id="div'.$panels[$i]['id_panel'].'">';
 		}
-					echo '<div class="col-md-12 cust'.$panels[$i]['id_panel'].'">';
-					echo $panels[$i]['header_text'];
-					echo '</div>';
-					if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
-						echo '<div class="pull-left icolog"><a href="database/logout.php"><i class="icon-logout icons"></i></a></div>'; //wylogowanie
-						//echo '<div class="pull-left ico"><a href="search.php"><i class="icon-search icons"></i></a></div>'; //wylogowanie
-						echo '<div class="pull-left ico"><a href="view/add.php"><i class="icon-plus-2 icons"></i></a></div>';
-						echo '<div class="pull-left ico"><a href="view/profile.php"><i class="icon-user icons"></i></a></div>';
-						echo '<div class="pull-right ico"><a href="view/delete.php?id='.$panels[$i]['id_panel'].'"><i class="icon-trash icons"></i></a></div>';
-						echo '<div class="pull-right ico"><a href="view/edit1.php?id='.$panels[$i]['id_panel'].'"><i class="icon-cog icons"></i></a></div>';
-						
-						if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user'] && $_SESSION['role']==1) {
-							echo '<div class="pull-left ico"><a href="view/useradd.php"><i class="icon-user-plus icons"></i></a></div>';
-						}
-					} else {
-						echo '<div class="pull-left icolog"><a href="view/login.php"><i class="icon-login icons"></i></a></div>'; //logowanie
-					}				
-			echo '</div>';
+		echo '<div class="col-md-12 cust'.$panels[$i]['id_panel'].'">';
+		echo $panels[$i]['header_text'];
 		echo '</div>';
+		if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
+			echo '<div class="pull-right ico"><a href="view/delete.php?id='.$panels[$i]['id_panel'].'"><i class="icon-trash icons"></i></a></div>';
+			echo '<div class="pull-right ico"><a href="view/edit1.php?id='.$panels[$i]['id_panel'].'"><i class="icon-cog icons"></i></a></div>';
+		}
+								
+		
+		echo '</div>';
+	echo '</div>';
 	}
-	else{
+	else {
 //================================== Pozostałe bloki =============================================
 			if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
 				echo '<div class="ui-widget-content panel panel-primary block" id="div'.$panels[$i]['id_panel'].'">';
@@ -89,14 +108,16 @@ for ($i=0; $i<count($panels);$i++){
 						echo '<div class="col-md-12">';
 								echo $panels[$i]['header_text'];
 							echo '</div>';
-								 echo '<div class="col-md-12">';
-								 if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
-									 echo '<div class="pull-left ico"><a href="view/edit.php?id='.$panels[$i]['id_panel'].'"><i class="icon-cog icons"></i></a></div>';
-									 echo '<div class="pull-left ico"><a href="view/delete.php?id='.$panels[$i]['id_panel'].'"><i class="icon-trash icons"></i></a></div>';
-								 }
+								echo '<div class="col-md-12">';
+								if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
+									echo '<div class="pull-left ico"><a href="view/edit.php?id='.$panels[$i]['id_panel'].'"><i class="icon-cog icons"></i></a></div>';
+									echo '<div class="pull-left ico"><a href="view/delete.php?id='.$panels[$i]['id_panel'].'"><i class="icon-trash icons"></i></a></div>';
+								}
 //--------- Jeśli blok z losowaniem ----------------------------
 									if($panels[$i]['block_type']=='drawblock'){
-										echo '<button onclick="losowanieAjax()" class="btn ico icons buttoncustom pull-right" id="randomize" name="randomize"><i class="icon-spin3 rand"></i></button>';
+										if (isset($_SESSION['zalogowany']) && isset($_COOKIE['user']) && $_SESSION['zalogowany'] == $_COOKIE['user']) {
+											echo '<button onclick="losowanieAjax()" class="btn ico icons buttoncustom pull-right" id="randomize" name="randomize"><i class="icon-spin3 rand"></i></button>';
+										}
 									}
 //---------------------------------------------------------
 								echo '</div>';
@@ -104,24 +125,24 @@ for ($i=0; $i<count($panels);$i++){
 				 echo '</div>';
 //---------- Jeśli blok ze zdjęciami, bez paddingu---------
 		 if($panels[$i]['block_type']=='sliderblock')
-			 echo '<div class="panel-body nopadding sliderblock cust'.$panels[$i]['id_panel'].'">';
+			echo '<div class="panel-body nopadding sliderblock cust'.$panels[$i]['id_panel'].'">';
 //---------------------------------------------------------
-		 else
-			 echo '<div class="panel-body cust'.$panels[$i]['id_panel'].'">';
+		else
+			echo '<div class="panel-body cust'.$panels[$i]['id_panel'].'">';
 		
 //========================== Subpanel malejąco ================================		
-			 $message = new message();
-			 $messages = $message->getAllVisibleDESC($panels[$i]['id_panel']);
+			$message = new message();
+			$messages = $message->getAllVisibleDESC($panels[$i]['id_panel']);
 			
 //------------ Jeśli blok z komunikatami -----------------------------------
 		if(count($messages)>0){
-			 if($panels[$i]['block_type']=='multipleblock')
-				 echo '<div id="sdiv'.$messages[0]['id_message'].'" class="anim '.$panels[$i]['block_type'].'">';	
-			 else 
-				 echo '<div id="sdiv'.$messages[0]['id_message'].'" class="'.$panels[$i]['block_type'].'">';
+			if($panels[$i]['block_type']=='multipleblock') 
+				echo '<div id="sdiv'.$messages[0]['id_message'].'" class="anim '.$panels[$i]['block_type'].'">';	
+			else 
+				echo '<div id="sdiv'.$messages[0]['id_message'].'" class="'.$panels[$i]['block_type'].'">';
 			
-				 echo '<p>'.$messages[0]['content'].'</p>';
-				 echo '</div>';
+				echo '<p>'.$messages[0]['content'].'</p>';
+				echo '</div>';
 		}
 //=========================================================================
 		/*	while($e=$subtable->fetch_assoc()){
@@ -136,11 +157,12 @@ for ($i=0; $i<count($panels);$i++){
 }
 ?>
 		</div>
-		<script src="js/slider.js"></script>
+		
 		<script src="js/zegar.js"></script>
 		<script src="js/divsinfo.js"></script>
 		<script src="js/seedrandom.js"></script> <!-- Biblioteka losowania z seedowaniem -->
 		<script src="js/losowanie.js"></script>
+		<script src="js/slider.js"></script>
 
 
 </body>

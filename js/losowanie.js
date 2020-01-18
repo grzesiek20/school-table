@@ -34,7 +34,10 @@ function losowanieAjax(){ //pobranie wszystkich niewylosowanych
 					  liczby = data.split('-');
 					  los = Math.seedrandom();
 					  index = Math.round((Math.random(los) * liczby.length)); //losowanie
-					$('#sdiv7').html(liczby[index]);	
+					  var drawBlock = $('.drawblock');
+					  if (drawBlock) {
+						  drawBlock.html(liczby[index]);
+					  }
 					
 					wykluczAjax(liczby[index]);  //wykluczenie wylosowanej liczby
 				  } 
